@@ -59,6 +59,7 @@ public class Code_Arena : MonoBehaviour {
         }        
     }
 
+    // Selects the next group of parts that need to fall down
     public void SelectNextGroupToCrumble() {
         currentGroupToCrumble++;
         // Call CrumbleTimer to continue the cycle
@@ -72,6 +73,7 @@ public class Code_Arena : MonoBehaviour {
         float endTime = Time.time + waitTime;
         while (Time.time < endTime)
         {
+            // TODO change turning the renderer on and off to changing it's Colour
             arenaRenderer.enabled = false;
             yield return new WaitForSeconds(blinkingTime);
             arenaRenderer.enabled = true;
