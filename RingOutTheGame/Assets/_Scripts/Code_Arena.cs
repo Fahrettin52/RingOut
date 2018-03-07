@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class Code_Arena : MonoBehaviour {
 
+    public float wholeBlinkingTime;
+    public float blinkingTime;
+    public float initialCrumbleTime;
     public float timeBetweenCrumbles;
     public float timeTillDeactivation;
     public float crumbleSpeed;
     private float startPos;
     private int currentArenaPart;
+    public int[] groupsToCrumble;
+    private int currentGroupToCrumble;
     private List<Transform> arenaParts = new List<Transform>();
 
 	// Use this for initialization
@@ -17,7 +22,8 @@ public class Code_Arena : MonoBehaviour {
         startPos = transform.position.y;
 
         FillArenaPartsList();
-        StartCoroutine(CrumbleTimer(timeBetweenCrumbles));
+
+        StartCoroutine(CrumbleTimer(initialCrumbleTime));
     }
 
     // Fills the arenaParts List
@@ -30,7 +36,7 @@ public class Code_Arena : MonoBehaviour {
     // Counts down for each part that'll crumble
     private IEnumerator CrumbleTimer(float crumbleTimer) {
         yield return new WaitForSeconds(crumbleTimer);
-        CrumbleProcess();
+        CrumbleSelector();
     }
 
     // Counts down to when the fallen part should be deactivated
@@ -38,11 +44,46 @@ public class Code_Arena : MonoBehaviour {
         yield return new WaitForSeconds(deactivationTime);
         fallenPart.gameObject.SetActive(false);
     }
+    
+    // Selects the group that should 
+    private void CrumbleSelector() {
+        int groupMembers = groupsToCrumble[currentGroupToCrumble];
+        for (int i = 0; i < groupMembers ; i++) {
+            StartCoroutine(Blink(wholeBlinkingTime, arenaParts[currentArenaPart]));
+            currentArenaPart++;
+        }
+
+        // Invokes SelectNextGroupToCrumble after checking if it's not the round in the cycle
+        if (currentGroupToCrumble < groupsToCrumble.Length - 1) {
+            Invoke("SelectNextGroupToCrumble", timeBetweenCrumbles);
+        }        
+    }
+
+    public void SelectNextGroupToCrumble() {
+        currentGroupToCrumble++;
+        // Call CrumbleTimer to continue the cycle
+        StartCoroutine(CrumbleTimer(timeBetweenCrumbles));
+    }
+
+    // Indicates the parts that are about to crumble 
+    public IEnumerator Blink(float waitTime, Transform arenaPart)
+    {
+        Renderer arenaRenderer = arenaPart.GetComponent<Renderer>();
+        float endTime = Time.time + waitTime;
+        while (Time.time < endTime)
+        {
+            arenaRenderer.enabled = false;
+            yield return new WaitForSeconds(blinkingTime);
+            arenaRenderer.enabled = true;
+            yield return new WaitForSeconds(blinkingTime);
+        }
+
+        CrumbleProcess(arenaPart);
+    }
 
     // Crumbles the current part of the arena.
-    private void CrumbleProcess() {
+    private void CrumbleProcess(Transform currentPart) {
         // Caching the arenaParts[currentArenaPart] into local variables
-        Transform currentPart = arenaParts[currentArenaPart];
         Rigidbody currentPartRigidbody = currentPart.gameObject.GetComponent<Rigidbody>();
 
         // Moving the currentpart under the arena so the convexed collider doesn't glitch into the other parts of the arena
@@ -56,14 +97,5 @@ public class Code_Arena : MonoBehaviour {
 
         // Calls the DeactivateFallenPart Coroutine so that after a while the currentPart gets deactivated
         StartCoroutine(DeactivateFallenPart(timeTillDeactivation, currentPart));
-
-        // Increase cuurentArenaPart with 1, so we can call the next one
-        currentArenaPart++;
-
-        // Checking if currentpart is not the final piece of the arena
-        if (currentArenaPart != arenaParts.Count - 1) { 
-            // Call CrumbleTimer to continue the cycle
-            StartCoroutine(CrumbleTimer(timeBetweenCrumbles));
-        }        
     }
 }
