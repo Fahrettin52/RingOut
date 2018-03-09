@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Code_Arena : MonoBehaviour {
-
+    [Header("Blinking Process")]
     public float wholeBlinkingTime;
     public float blinkingTime;
+    public Color blinkingColor;
+    [Header("Crumble Process")]
     public float initialCrumbleTime;
     public float timeBetweenCrumbles;
-    public float timeTillDeactivation;
     public float crumbleSpeed;
-    private float startPos;
-    private int currentArenaPart;
+    [Header("(De)Activating Objects")]
+    public float timeTillDeactivation;
+    [Header("Arena Parts to Crumble Collectively")]
     public int[] groupsToCrumble;
+
+    private float startPos;
+    private int currentArenaPart;    
     private int currentGroupToCrumble;
     private List<Transform> arenaParts = new List<Transform>();
 
@@ -68,17 +73,20 @@ public class Code_Arena : MonoBehaviour {
 
     // Indicates the parts that are about to crumble 
     public IEnumerator Blink(float waitTime, Transform arenaPart)
-    {
+    {        
         Renderer arenaRenderer = arenaPart.GetComponent<Renderer>();
+        Color arenaPartColor = arenaRenderer.material.color;
         float endTime = Time.time + waitTime;
         while (Time.time < endTime)
         {
-            // TODO change turning the renderer on and off to changing it's Colour
-            arenaRenderer.enabled = false;
-            yield return new WaitForSeconds(blinkingTime);
-            arenaRenderer.enabled = true;
+            // PingPongs the color of crumbling arenaPart
+            float lerpBlinkingColor = Mathf.PingPong(Time.time, blinkingTime) / blinkingTime;
+            arenaRenderer.material.color = Color.Lerp(arenaPartColor, blinkingColor, lerpBlinkingColor); 
             yield return new WaitForSeconds(blinkingTime);
         }
+
+        //Sets the color of the arenaPart back to it's original so that it never crumbles whilst in the blinkingColors value
+        arenaRenderer.material.color = arenaPartColor;
 
         CrumbleProcess(arenaPart);
     }
