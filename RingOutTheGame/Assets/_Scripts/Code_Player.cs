@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Code_Player : MonoBehaviour {
 
@@ -8,13 +6,12 @@ public class Code_Player : MonoBehaviour {
     public int rotationSpeed;
 
     public Vector3 input;
+    public Vector3 targetRotation;
 
     public Rigidbody rigidbod;
 
-    public Vector3 targetRotation;
-
-    private void Start()
-    {
+    // Use this for initialization
+    private void Start() {
         rigidbod = GetComponent<Rigidbody>();
     }
 
@@ -24,10 +21,9 @@ public class Code_Player : MonoBehaviour {
 	}
 
     /// <summary>
-    /// Handles the movement and otation of the player
+    /// Handles the movement and rotation of the player
     /// </summary>
-    private void Movement()
-    {
+    private void Movement() {
         Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
         if (move != Vector3.zero) {
             transform.rotation = Quaternion.LookRotation(move * Time.deltaTime);
