@@ -780,8 +780,8 @@ MonoBehaviour:
   blinkingColor: {r: 1, g: 0, b: 0, a: 0}
   initialCrumbleTime: 10
   timeBetweenCrumbles: 5
-  timeTillDeactivation: 10
   crumbleSpeed: 1
+  timeTillDeactivation: 10
   groupsToCrumble: 030000000300000002000000
 --- !u!1 &250908595
 GameObject:
@@ -4299,12 +4299,23 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 54626177}
+        m_MethodName: Pause
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 54626177}
         m_MethodName: ToggleMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

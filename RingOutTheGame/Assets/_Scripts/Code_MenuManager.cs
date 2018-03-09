@@ -17,6 +17,8 @@ public class Code_MenuManager : MonoBehaviour {
 
     public EventSystem eventSystem;
 
+    public bool pauseToggle;
+
     // Use this for initialization
     public void Start() {
         InitializeMenu();
@@ -26,6 +28,8 @@ public class Code_MenuManager : MonoBehaviour {
     void Update () {
         if (Input.GetButtonDown("StartButton"))
         {
+            Pause();
+
             ToggleMainMenu();
         }
     }
@@ -64,6 +68,8 @@ public class Code_MenuManager : MonoBehaviour {
         {
             PickFirstButton(mainMenuButtons, mainMenuBorder.activeSelf, 0);
         }
+
+        pauseToggle = false;
     }
 
     // Toggles the mainMenu
@@ -101,6 +107,17 @@ public class Code_MenuManager : MonoBehaviour {
     // Quits the application
     public void QuitGame() {
         Application.Quit();
+    }
+
+    // Pause the game
+    public void Pause() {
+        if (pauseToggle) {
+            Time.timeScale = 1;
+        }
+        else { 
+            Time.timeScale = 0;
+        }
+        pauseToggle = !pauseToggle;
     }
 
     public void PickFirstButton(List<GameObject> gameObject, bool boolean, int number) {
