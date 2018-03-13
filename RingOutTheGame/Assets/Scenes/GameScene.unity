@@ -4557,10 +4557,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 5
   rotationSpeed: 1
-  stamina: 50
+  stamina: 100
+  attackCost: 25
+  staminaRegenAmount: 5
+  staminaRegenRate: 0.5
   knockbackSpeed: 10
   knockbackTime: 0.5
   smoothingRate: 10
+  knockbackDangerLevels: 0a00000019000000320000004b000000
+  knockbackMultiplierList:
+  - 4
+  - 3
+  - 2
+  - 1.5
 --- !u!1 &1961469045
 GameObject:
   m_ObjectHideFlags: 0
