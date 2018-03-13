@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Code_Arena : MonoBehaviour {
+
     [Header("Blinking Process")]
     public float wholeBlinkingTime;
     public float blinkingTime;

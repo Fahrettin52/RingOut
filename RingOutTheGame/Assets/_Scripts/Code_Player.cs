@@ -3,6 +3,16 @@ using System.Collections;
 
 public class Code_Player : MonoBehaviour {
 
+    public bool notControlled; // Test variable to make sure only one is controlled by player.
+
+    private enum MoveState {
+        Normal,
+        Knockedback,
+        Attacking
+    }
+    private MoveState moveState;
+    public GameObject shield; // The PCs connectec shield
+    private Code_Shield shieldCode; // the Code_Shield component on the shield child
     public int movementSpeed;
     public int rotationSpeed;
     [Header("Stamina Related")]
@@ -28,26 +38,27 @@ public class Code_Player : MonoBehaviour {
 
     private Vector3 knockbackDir; // Direction the knockback will move in
 
-    private bool mayMove; // Determines whether or not the player has control over the PCs movement. True = yes, False = no
-
     // Use this for initialization
     private void Start() {
-        SetStartVariables();        
-        ToggleMayMove();
+        SetStartVariables();      
     }
 
     // Update is called once per frame
     void Update() {
-        if (mayMove) {
-            Movement();
-        }
-        else {
-            Knockback();
-        }
-
-        if (Input.GetButtonDown("Jump")) {
-            Attack();
-        }
+        switch (moveState) {
+            case MoveState.Normal:
+                if (notControlled) { 
+                    Movement();
+                    Attack();
+                }
+                break;
+            case MoveState.Knockedback:
+                Knockback();
+                break;
+            case MoveState.Attacking:
+                // TODO determine what the player can do whilst he's attacking or whether he shouldn't be able to do anything else
+                break;            
+        }     
 
         if (stamina < startStamina) {
             StaminaRegen();
@@ -68,11 +79,13 @@ public class Code_Player : MonoBehaviour {
 
     // Called from the Attack/Action buttons
     public void Attack() {
-        // Making sure that stamina never gets below 0
-        if (stamina - attackCost >= 0) {
-            // TODO activate the shield here
-
-            stamina -= attackCost;
+        if (Input.GetButtonDown("Jump") || Input.GetButtonDown("AButton")) {
+            // Making sure that stamina never gets below 0
+            if (stamina - attackCost >= 0) {
+                SwitchMoveState(MoveState.Attacking);
+                shieldCode.Attack();
+                stamina -= attackCost;
+            }
         }
     }
 
@@ -85,7 +98,7 @@ public class Code_Player : MonoBehaviour {
         knockbackDir.y = 0f;
 
         // Disallow movement
-        ToggleMayMove();
+        SwitchMoveState(MoveState.Knockedback);
         StartCoroutine(KnockbackCountdown());
     }
 
@@ -107,7 +120,7 @@ public class Code_Player : MonoBehaviour {
     private IEnumerator KnockbackCountdown() {
         yield return new WaitForSeconds(knockbackTime);
         knockbackSpeed = startKnockbackSpeed;
-        ToggleMayMove();
+        SwitchMoveState(MoveState.Normal);
     }
 
     // Increases the knockbackSpeed depending on how much stamina the PC has left.
@@ -121,9 +134,13 @@ public class Code_Player : MonoBehaviour {
         return 1f;
     }
 
-    // Toggles the mayMove variable
-    private void ToggleMayMove() {
-        mayMove = !mayMove;
+    // Centralisation of the changing of this PCs moveState
+    private void SwitchMoveState(MoveState newMoveState) {
+        moveState = newMoveState;
+    }
+
+    public void AttackEnded() {
+        SwitchMoveState(MoveState.Normal);
     }
 
     // Regenerates the PCs stamina when it's necesary
@@ -138,6 +155,7 @@ public class Code_Player : MonoBehaviour {
     private void SetStartVariables (){
         startStamina = stamina;
         startKnockbackSpeed = knockbackSpeed;
+        shieldCode = shield.GetComponent<Code_Shield>();
     }
 
     // Is the only Function that call StartKnockback() and should be removed/changed once the shields are being implemented
