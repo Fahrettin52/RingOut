@@ -11,6 +11,7 @@ public class Code_Player : MonoBehaviour {
         Attacking
     }
     private MoveState moveState;
+
     public GameObject shield; // The PCs connectec shield
     private Code_Shield shieldCode; // the Code_Shield component on the shield child
     public int movementSpeed;
@@ -37,6 +38,8 @@ public class Code_Player : MonoBehaviour {
     public float[] knockbackMultiplierList; // Connected to knockbackDangerLevels. Determine when to use which multiplier
 
     private Vector3 knockbackDir; // Direction the knockback will move in
+
+    private Animator playerAnim; // From the player child object
 
     // Use this for initialization
     private void Start() {
@@ -99,6 +102,8 @@ public class Code_Player : MonoBehaviour {
 
         // Disallow movement
         SwitchMoveState(MoveState.Knockedback);
+        // Play Knockedback animation
+        playerAnim.SetTrigger("Knockedback");
         StartCoroutine(KnockbackCountdown());
     }
 
@@ -120,7 +125,8 @@ public class Code_Player : MonoBehaviour {
     private IEnumerator KnockbackCountdown() {
         yield return new WaitForSeconds(knockbackTime);
         knockbackSpeed = startKnockbackSpeed;
-        SwitchMoveState(MoveState.Normal);
+        playerAnim.SetTrigger("KnockbackHalted");
+        //SwitchMoveState(MoveState.Normal); // TODO replace this through an event key in the KnockbackHalt animation
     }
 
     // Increases the knockbackSpeed depending on how much stamina the PC has left.
@@ -139,7 +145,8 @@ public class Code_Player : MonoBehaviour {
         moveState = newMoveState;
     }
 
-    public void AttackEnded() {
+    // When an animation sequence (like being knocked back or attacking) has ended and the moveState requires to be Normal again
+    public void AnimationEnded() {
         SwitchMoveState(MoveState.Normal);
     }
 
@@ -155,6 +162,7 @@ public class Code_Player : MonoBehaviour {
     private void SetStartVariables (){
         startStamina = stamina;
         startKnockbackSpeed = knockbackSpeed;
+        playerAnim = GetComponentInChildren<Animator>();
         shieldCode = shield.GetComponent<Code_Shield>();
     }
 
