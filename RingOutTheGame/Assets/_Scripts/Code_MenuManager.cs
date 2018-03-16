@@ -89,7 +89,7 @@ public class Code_MenuManager : MonoBehaviour {
     }
 
     // Load the scene with the scene index
-    public void LoadGameScene(int scene) {
+    public virtual void LoadGameScene(int scene) {
         SceneManager.LoadScene(scene);
     }
 
