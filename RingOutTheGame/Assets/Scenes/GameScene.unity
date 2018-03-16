@@ -1193,7 +1193,12 @@ Prefab:
     - target: {fileID: 114559492071315086, guid: de9a67168feb5114aba4a73e16e6fbda,
         type: 2}
       propertyPath: notControlled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114559492071315086, guid: de9a67168feb5114aba4a73e16e6fbda,
+        type: 2}
+      propertyPath: playerNumber
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: de9a67168feb5114aba4a73e16e6fbda, type: 2}
@@ -3628,6 +3633,11 @@ Prefab:
     - target: {fileID: 1936532488741708, guid: de9a67168feb5114aba4a73e16e6fbda, type: 2}
       propertyPath: m_Name
       value: PlayerController (0)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114559492071315086, guid: de9a67168feb5114aba4a73e16e6fbda,
+        type: 2}
+      propertyPath: playerNumber
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: de9a67168feb5114aba4a73e16e6fbda, type: 2}

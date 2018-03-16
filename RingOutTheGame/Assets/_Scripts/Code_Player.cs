@@ -16,6 +16,8 @@ public class Code_Player : MonoBehaviour {
     private Code_Shield shieldCode; // the Code_Shield component on the shield child
     public int movementSpeed;
     public int rotationSpeed;
+    public int playerNumber;
+    private string playerNumberString;
     [Header("Stamina Related")]
     public int stamina;
     public int attackCost; // Determines how much stamina is consumed after attacking
@@ -72,7 +74,7 @@ public class Code_Player : MonoBehaviour {
     /// Handles the movement and rotation of the player
     /// </summary>
     private void Movement() {
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
+        Vector3 move = new Vector3(Input.GetAxis("Horizontal" + playerNumberString), 0f, Input.GetAxis("Vertical" + playerNumberString));
         if (move != Vector3.zero) {
             transform.rotation = Quaternion.LookRotation(move * Time.deltaTime);
         }
@@ -82,7 +84,7 @@ public class Code_Player : MonoBehaviour {
 
     // Called from the Attack/Action buttons
     public void Attack() {
-        if (Input.GetButtonDown("Jump") || Input.GetButtonDown("AButton")) {
+        if (Input.GetButtonDown("Jump") || Input.GetButtonDown("AButton" + playerNumberString)) {
             // Making sure that stamina never gets below 0
             if (stamina - attackCost >= 0) {
                 SwitchMoveState(MoveState.Attacking);
@@ -160,6 +162,7 @@ public class Code_Player : MonoBehaviour {
 
     // Sets any variable that needs to be set during Start()
     private void SetStartVariables (){
+        playerNumberString = playerNumber.ToString();
         startStamina = stamina;
         startKnockbackSpeed = knockbackSpeed;
         playerAnim = GetComponentInChildren<Animator>();
