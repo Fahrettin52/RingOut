@@ -60,3 +60,4 @@ MonoBehaviour:
   controlsMenu: {fileID: 0}
   confirmQuit: {fileID: 0}
   eventSystem: {fileID: 0}
+  pauseToggle: 0

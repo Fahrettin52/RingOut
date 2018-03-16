@@ -24,16 +24,6 @@ public class Code_MenuManager : MonoBehaviour {
         InitializeMenu();
     }
 
-    // Update is called once per frame
-    void Update () {
-        if (Input.GetButtonDown("StartButton"))
-        {
-            Pause();
-
-            ToggleMainMenu();
-        }
-    }
-
     // Initializes the game
     public virtual void InitializeMenu() {
         foreach (Transform item in mainMenuBorder.transform) {
@@ -72,31 +62,30 @@ public class Code_MenuManager : MonoBehaviour {
         pauseToggle = false;
     }
 
-    // Toggles the mainMenu
-    public void ToggleMainMenu() {
-        mainMenuBorder.SetActive(!mainMenuBorder.activeSelf);
-        PickFirstButton(mainMenuButtons, !mainMenuBorder.activeSelf, 0);
-    }
+    public void ToggleMenus(int number) {
 
-    // Toggles the settingsMenu
-    public void ToggleSettingMenu() {
         mainMenuBorder.SetActive(!mainMenuBorder.activeSelf);
-        settingsMenu.SetActive(!settingsMenu.activeSelf);
-        PickFirstButton(settingsButtons, !settingsMenu.activeSelf, 1);
-    }
 
-    // Toggles the controlsMenu
-    public void ToggleControlsMenu() {
-        mainMenuBorder.SetActive(!mainMenuBorder.activeSelf);
-        controlsMenu.SetActive(!controlsMenu.activeSelf);
-        PickFirstButton(controlButtons, !controlsMenu.activeSelf, 2);
-    }
+        switch (number) {
+            case 0:
+                PickFirstButton(mainMenuButtons, !mainMenuBorder.activeSelf, number);
+                break;
+            case 1:
+                settingsMenu.SetActive(!settingsMenu.activeSelf);
+                PickFirstButton(settingsButtons, !settingsMenu.activeSelf, number);
+                break;
+            case 2:
+                controlsMenu.SetActive(!controlsMenu.activeSelf);
+                PickFirstButton(controlButtons, !controlsMenu.activeSelf, number);
+                break;
+            case 3:
+                confirmQuit.SetActive(!confirmQuit.activeSelf);
+                PickFirstButton(confirmQuitButtons, !confirmQuit.activeSelf, number);
+                break;
 
-    // Toggles the confirmQuit
-    public void ToggleConformQuit() {
-        mainMenuBorder.SetActive(!mainMenuBorder.activeSelf);
-        confirmQuit.SetActive(!confirmQuit.activeSelf);
-        PickFirstButton(confirmQuitButtons, !confirmQuit.activeSelf, 3);
+            default:
+                break;
+        }
     }
 
     // Load the scene with the scene index

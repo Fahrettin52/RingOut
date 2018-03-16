@@ -191,12 +191,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 15983851}
---- !u!114 &54626177 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114702468233324270, guid: 844a27ccdd900ad4cb9280c4302a2145,
-    type: 2}
-  m_PrefabInternal: {fileID: 65752639}
-  m_Script: {fileID: 11500000, guid: 51c3bbe3aaa1eea47a3bc391d4672ff1, type: 3}
 --- !u!1001 &65752639
 Prefab:
   m_ObjectHideFlags: 0
@@ -261,7 +255,8 @@ Prefab:
       propertyPath: eventSystem
       value: 
       objectReference: {fileID: 430622912}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114702468233324270, guid: 844a27ccdd900ad4cb9280c4302a2145, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 844a27ccdd900ad4cb9280c4302a2145, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &67415889
@@ -343,9 +338,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 54626177}
-        m_MethodName: ToggleControlsMenu
-        m_Mode: 1
+      - m_Target: {fileID: 589232643}
+        m_MethodName: ToggleMenus
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1104,9 +1099,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 54626177}
-        m_MethodName: ToggleConformQuit
-        m_Mode: 1
+      - m_Target: {fileID: 589232643}
+        m_MethodName: ToggleMenus
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1161,7 +1156,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4107781155717442, guid: de9a67168feb5114aba4a73e16e6fbda, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4107781155717442, guid: de9a67168feb5114aba4a73e16e6fbda, type: 2}
       propertyPath: m_LocalPosition.y
@@ -1522,9 +1517,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 54626177}
-        m_MethodName: ToggleSettingMenu
-        m_Mode: 1
+      - m_Target: {fileID: 589232643}
+        m_MethodName: ToggleMenus
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1674,6 +1669,32 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 517783175}
   m_Mesh: {fileID: 4300006, guid: 2c5440b23c708d24aaee5ed6b39c3314, type: 3}
+--- !u!1 &589232642 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1321051525788204, guid: 844a27ccdd900ad4cb9280c4302a2145,
+    type: 2}
+  m_PrefabInternal: {fileID: 65752639}
+--- !u!114 &589232643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 589232642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9990d4ab9fb4e3e4c8ca43589196e638, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMenuButtons: []
+  settingsButtons: []
+  controlButtons: []
+  confirmQuitButtons: []
+  mainMenuBorder: {fileID: 186575188}
+  settingsMenu: {fileID: 2052617803}
+  controlsMenu: {fileID: 1358684912}
+  confirmQuit: {fileID: 1655049393}
+  eventSystem: {fileID: 430622912}
+  pauseToggle: 0
 --- !u!1 &658443059
 GameObject:
   m_ObjectHideFlags: 0
@@ -2034,7 +2055,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 54626177}
+      - m_Target: {fileID: 589232643}
         m_MethodName: LoadGameScene
         m_Mode: 3
         m_Arguments:
@@ -2949,9 +2970,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 54626177}
-        m_MethodName: ToggleSettingMenu
-        m_Mode: 1
+      - m_Target: {fileID: 589232643}
+        m_MethodName: ToggleMenus
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3574,7 +3595,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4107781155717442, guid: de9a67168feb5114aba4a73e16e6fbda, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 4107781155717442, guid: de9a67168feb5114aba4a73e16e6fbda, type: 2}
       propertyPath: m_LocalPosition.y
@@ -3973,9 +3994,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 54626177}
-        m_MethodName: ToggleControlsMenu
-        m_Mode: 1
+      - m_Target: {fileID: 589232643}
+        m_MethodName: ToggleMenus
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4394,9 +4415,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 54626177}
-        m_MethodName: Pause
-        m_Mode: 1
+      - m_Target: {fileID: 589232643}
+        m_MethodName: ToggleMenus
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4405,8 +4426,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 54626177}
-        m_MethodName: ToggleMainMenu
+      - m_Target: {fileID: 589232643}
+        m_MethodName: Pause
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4532,9 +4553,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 54626177}
-        m_MethodName: ToggleConformQuit
-        m_Mode: 1
+      - m_Target: {fileID: 589232643}
+        m_MethodName: ToggleMenus
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
