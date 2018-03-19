@@ -6,9 +6,12 @@ public class Code_InGameMenuManager : Code_MenuManager {
     // Update is called once per frame
     void Update() {
         if (Input.GetButtonDown("StartButton")) {
-            Pause();
+            if (!CheckMenuElements())
+            {
+                Pause();
 
-            ToggleMenus(0);
+                ToggleMenus(0);
+            }
         }
     }
 
@@ -18,5 +21,21 @@ public class Code_InGameMenuManager : Code_MenuManager {
         SceneManager.LoadScene(scene);
 
         Pause();
+    }
+
+    /// <summary>
+    /// Checks if the elemnts in the menu are active
+    /// </summary>
+    /// <returns></returns>
+    public bool CheckMenuElements()
+    {
+        if (settingsMenu.activeInHierarchy || controlsMenu.activeInHierarchy || confirmQuit.activeInHierarchy)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
