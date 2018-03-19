@@ -109,4 +109,11 @@ public class Code_Arena : MonoBehaviour {
         // Calls the DeactivateFallenPart Coroutine so that after a while the currentPart gets deactivated
         StartCoroutine(DeactivateFallenPart(timeTillDeactivation, currentPart));
     }
+
+    // To check if the player falls off the arena
+    public void OnTriggerEnter(Collider col) {
+        if (col.transform.CompareTag("Player")) {
+            col.GetComponent<Code_Player>().Die();
+        }
+    }
 }

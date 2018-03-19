@@ -3,18 +3,20 @@ using System.Collections;
 
 public class Code_Player : MonoBehaviour {
 
-    public bool notControlled; // Test variable to make sure only one is controlled by player.
+    public bool keyboardControlled; // Test variable to make sure only one is controlled by player.
 
     private enum MoveState {
         Normal,
         Knockedback,
-        Attacking
+        Attacking,
+        Death
     }
     private MoveState moveState;
 
     public GameObject shield; // The PCs connectec shield
     private Code_Shield shieldCode; // the Code_Shield component on the shield child
     public int movementSpeed;
+    public int maxSpeed; // Determines the maximu amount the player is allowed to move
     public int rotationSpeed;
     public int playerNumber;
     private string playerNumberString;
@@ -52,15 +54,15 @@ public class Code_Player : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (!TouchingGround()) {
-            return;
-        }
-
         switch (moveState) {
             case MoveState.Normal:
-                if (notControlled) { 
+                if (!keyboardControlled) {
                     Movement();
                     Attack();
+                }
+                else {
+                    MovementKeyboard(); // TODO remove this after testing phase
+                    AttackKeyboard(); // TODO remove this after testing phase
                 }
                 break;
             case MoveState.Knockedback:
@@ -76,30 +78,53 @@ public class Code_Player : MonoBehaviour {
         }
     }
 
-    // Uses a downward Raycast to check if there's still ground underneath the player
-    private bool TouchingGround() {
-        // Replace the Raycast with a Physics.CheckCapsule if the Arena will be filled with uneven ground or have many "tiny" holes in them
-        return Physics.Raycast(transform.position, -transform.up, groundRayCastLength);
-    }
-
     /// <summary>
     /// Handles the movement and rotation of the player
     /// </summary>
     private void Movement() {        
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal" + playerNumberString), 0f, Input.GetAxis("Vertical" + playerNumberString));
-        Vector3 moveTest = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical")); // TODO Remove afterwards
-        if (move != Vector3.zero || moveTest != Vector3.zero) { // TODO Remove latter part afterwards
+        Vector3 move = new Vector3(
+            Input.GetAxis("Horizontal" + playerNumberString) * movementSpeed, 
+            rigidbod.velocity.y, 
+            Input.GetAxis("Vertical" + playerNumberString) * movementSpeed
+        );
+
+        if (move != Vector3.zero) {
             transform.rotation = Quaternion.LookRotation(move * Time.deltaTime);
-            transform.rotation = Quaternion.LookRotation(moveTest * Time.deltaTime);
         }
 
-        rigidbod.velocity = move * movementSpeed;
-        rigidbod.velocity = moveTest * movementSpeed; // TODO Remove afterwards
+        rigidbod.velocity = move;
     }
 
     // Called from the Attack/Action buttons
     public void Attack() {
-        if (Input.GetButtonDown("Jump") || Input.GetButtonDown("AButton" + playerNumberString)) {
+        if (Input.GetButtonDown("AButton" + playerNumberString)) {
+            // Making sure that stamina never gets below 0
+            if (stamina - attackCost >= 0) {
+                SwitchMoveState(MoveState.Attacking);
+                shieldCode.Attack();
+                stamina -= attackCost;
+            }
+        }
+    }
+
+    // TODO remove this function after testing
+    private void MovementKeyboard() {
+        Vector3 moveTest = new Vector3(
+            Input.GetAxis("HorizontalKeyboard") * movementSpeed, 
+            rigidbod.velocity.y, 
+            Input.GetAxis("VerticalKeyboard") * movementSpeed
+        ); 
+
+        if (moveTest != Vector3.zero) {
+            transform.rotation = Quaternion.LookRotation(moveTest * Time.deltaTime);
+        }
+
+        rigidbod.velocity = moveTest;
+    }
+
+    // TODO remove this function after testing
+    public void AttackKeyboard() {
+        if (Input.GetButtonDown("Jump")) {
             // Making sure that stamina never gets below 0
             if (stamina - attackCost >= 0) {
                 SwitchMoveState(MoveState.Attacking);
@@ -184,6 +209,12 @@ public class Code_Player : MonoBehaviour {
         playerAnim = GetComponentInChildren<Animator>();
         shieldCode = shield.GetComponent<Code_Shield>();
         rigidbod = GetComponent<Rigidbody>();
+    }
+
+    // When the player falls off the arena
+    public void Die() { // TODO fill this function with more functionality regarding dieing
+        SwitchMoveState(MoveState.Death);
+        rigidbod.velocity = new Vector3(0f, rigidbod.velocity.y, 0f);
     }
 
     // Is the only Function that call StartKnockback() and should be removed/changed once the shields are being implemented
