@@ -9,19 +9,22 @@ public class Code_SplashScreen : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        // Play the SplashScreen function
+        // Play the SplashScreen methode
         StartCoroutine(PlayAnimations());
     }
 
     /// <summary>
     /// The SplashScreen animation
     /// </summary>
-    IEnumerator PlayAnimations(){
+    IEnumerator PlayAnimations() {
+        // Store the Animation component in a temporarily variable for better performance
+        Animation animation = logo.GetComponent<Animation>();
+
         // Play the logo animation
-        logo.GetComponent<Animation>().Play();
+        animation.Play();
 
         // Wait for the logo animation clips length
-        yield return new WaitForSeconds(logo.GetComponent<Animation>().clip.length);
+        yield return new WaitForSeconds(animation.clip.length);
 
         // Start the MainMenu
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);

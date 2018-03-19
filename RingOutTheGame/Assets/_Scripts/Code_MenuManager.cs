@@ -10,6 +10,7 @@ public class Code_MenuManager : MonoBehaviour {
     public List<GameObject> settingsButtons = new List<GameObject>();
     public List<GameObject> controlButtons = new List<GameObject>();
     public List<GameObject> confirmQuitButtons = new List<GameObject>();
+
     public GameObject mainMenuBorder;
     public GameObject settingsMenu;
     public GameObject controlsMenu;
@@ -19,56 +20,62 @@ public class Code_MenuManager : MonoBehaviour {
 
     public bool pauseToggle;
 
-    // Use this for initialization
+    /// Use this for initialization
     public void Start() {
         InitializeMenu();
     }
 
-    // Initializes the game
+    /// <summary>
+    /// Initializes the game
+    /// </summary>
     public virtual void InitializeMenu() {
         foreach (Transform item in mainMenuBorder.transform) {
-            if (item.GetComponent<Button>() != null)
-            {
+            if (item.GetComponent<Button>() != null) {
                 mainMenuButtons.Add(item.gameObject);
             }
         }
 
         foreach (Transform item in settingsMenu.transform) {
-            if (item.GetComponent<Button>() != null || item.GetComponent<Toggle>() != null)
-            {
+            if (item.GetComponent<Button>() != null || item.GetComponent<Toggle>() != null) {
                 settingsButtons.Add(item.gameObject);
             }
         }
 
         foreach (Transform item in controlsMenu.transform) {
-            if (item.GetComponent<Button>() != null)
-            {
+            if (item.GetComponent<Button>() != null) {
                 controlButtons.Add(item.gameObject);
             }
         }
 
         foreach (Transform item in confirmQuit.transform) {
-            if (item.GetComponent<Button>() != null)
-            {
+            if (item.GetComponent<Button>() != null) {
                 confirmQuitButtons.Add(item.gameObject);
             }
         }
 
-        if (mainMenuBorder.activeSelf != false)
-        {
+        if (mainMenuBorder.activeSelf != false) {
             PickFirstButton(mainMenuButtons, mainMenuBorder.activeSelf, 0);
         }
 
         pauseToggle = false;
     }
 
+    /// <summary>
+    /// Toggles the MainMenu elements and picks the first element for selection
+    /// </summary>
+    /// <param name="number"></param>
     public void ToggleMenus(int number) {
 
         mainMenuBorder.SetActive(!mainMenuBorder.activeSelf);
 
         switch (number) {
             case 0:
-                PickFirstButton(mainMenuButtons, !mainMenuBorder.activeSelf, number);
+                if (mainMenuBorder.activeInHierarchy) {
+                    eventSystem.SetSelectedGameObject(mainMenuButtons[0]);
+                }
+                else {
+                    eventSystem.SetSelectedGameObject(null);
+                }
                 break;
             case 1:
                 settingsMenu.SetActive(!settingsMenu.activeSelf);
@@ -88,17 +95,24 @@ public class Code_MenuManager : MonoBehaviour {
         }
     }
 
-    // Load the scene with the scene index
+    /// <summary>
+    /// Load the scene with the scene index
+    /// </summary>
+    /// <param name="scene"></param>
     public virtual void LoadGameScene(int scene) {
         SceneManager.LoadScene(scene);
     }
 
-    // Quits the application
+    /// <summary>
+    /// Quits the application
+    /// </summary>
     public void QuitGame() {
         Application.Quit();
     }
 
-    // Pause the game
+    /// <summary>
+    /// Pause the game
+    /// </summary>
     public void Pause() {
         if (pauseToggle) {
             Time.timeScale = 1;
@@ -109,6 +123,12 @@ public class Code_MenuManager : MonoBehaviour {
         pauseToggle = !pauseToggle;
     }
 
+    /// <summary>
+    /// Picks the first elemnt in the list
+    /// </summary>
+    /// <param name="gameObject"></param>
+    /// <param name="boolean"></param>
+    /// <param name="number"></param>
     public void PickFirstButton(List<GameObject> gameObject, bool boolean, int number) {
         if (boolean) {
             eventSystem.SetSelectedGameObject(mainMenuButtons[number]);
