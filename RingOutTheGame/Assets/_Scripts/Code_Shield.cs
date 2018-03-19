@@ -7,19 +7,13 @@ public class Code_Shield : MonoBehaviour {
     private Animator anim;
     private BoxCollider myCol;
     private Code_Player playerCode; // The Code_Player component on the parent of this shield
-    private GameObject parent;
+    public GameObject parentPlayer; // Has to be the parent with the Code_Player component
 
     // Use this for initialization
     void Start() {
         anim = GetComponent<Animator>();
         myCol = GetComponent<BoxCollider>();
-        playerCode = GetComponentInParent<Code_Player>();
-        parent = transform.parent.gameObject;
-    }
-
-    // Update is called once per frame
-    void Update() {
-
+        playerCode = parentPlayer.GetComponent<Code_Player>();
     }
 
     // When the player attacks
@@ -42,12 +36,12 @@ public class Code_Shield : MonoBehaviour {
     // When the shield touches a player it "knocks back the player"
     public void OnTriggerEnter(Collider col) {
         Transform colTrans = col.transform;
-        if (col.gameObject != parent) {
+        if (col.gameObject != parentPlayer) {            
             if (colTrans.tag == "Player") {
-                colTrans.GetComponentInParent<Code_Player>().StartKnockback(transform.position);
+                colTrans.GetComponent<Code_Player>().StartKnockback(transform.position);
             }
             else if (colTrans.tag == "Shield") {
-                colTrans.GetComponentInParent<Code_Player>().StartKnockback(transform.position);
+                colTrans.GetComponent<Code_Player>().StartKnockback(transform.position);
             }
         }
     }
