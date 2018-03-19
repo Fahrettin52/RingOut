@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class Code_SplashScreen : MonoBehaviour {
 
     [SerializeField] private Image logo;
-    [SerializeField] private int sceneIndex;
 
     // Use this for initialization
     void Start () {
@@ -25,6 +24,6 @@ public class Code_SplashScreen : MonoBehaviour {
         yield return new WaitForSeconds(logo.GetComponent<Animation>().clip.length);
 
         // Start the MainMenu
-        SceneManager.LoadScene(sceneIndex);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
