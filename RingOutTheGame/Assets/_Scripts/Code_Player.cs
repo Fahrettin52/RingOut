@@ -18,6 +18,7 @@ public class Code_Player : MonoBehaviour {
     public int rotationSpeed;
     public int playerNumber;
     private string playerNumberString;
+    public float groundRayCastLength;
     [Header("Stamina Related")]
     public int stamina;
     public int attackCost; // Determines how much stamina is consumed after attacking
@@ -39,6 +40,7 @@ public class Code_Player : MonoBehaviour {
     [Header("Based on the array above (Has to be same size)")]
     public float[] knockbackMultiplierList; // Connected to knockbackDangerLevels. Determine when to use which multiplier
 
+    private Rigidbody rigidbod;
     private Vector3 knockbackDir; // Direction the knockback will move in
 
     private Animator playerAnim; // From the player child object
@@ -50,6 +52,10 @@ public class Code_Player : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        if (!TouchingGround()) {
+            return;
+        }
+
         switch (moveState) {
             case MoveState.Normal:
                 if (notControlled) { 
@@ -70,16 +76,25 @@ public class Code_Player : MonoBehaviour {
         }
     }
 
+    // Uses a downward Raycast to check if there's still ground underneath the player
+    private bool TouchingGround() {
+        // Replace the Raycast with a Physics.CheckCapsule if the Arena will be filled with uneven ground or have many "tiny" holes in them
+        return Physics.Raycast(transform.position, -transform.up, groundRayCastLength);
+    }
+
     /// <summary>
     /// Handles the movement and rotation of the player
     /// </summary>
-    private void Movement() {
+    private void Movement() {        
         Vector3 move = new Vector3(Input.GetAxis("Horizontal" + playerNumberString), 0f, Input.GetAxis("Vertical" + playerNumberString));
-        if (move != Vector3.zero) {
+        Vector3 moveTest = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical")); // TODO Remove afterwards
+        if (move != Vector3.zero || moveTest != Vector3.zero) { // TODO Remove latter part afterwards
             transform.rotation = Quaternion.LookRotation(move * Time.deltaTime);
+            transform.rotation = Quaternion.LookRotation(moveTest * Time.deltaTime);
         }
 
-        transform.Translate(move * movementSpeed * Time.deltaTime, Space.World);
+        rigidbod.velocity = move * movementSpeed;
+        rigidbod.velocity = moveTest * movementSpeed; // TODO Remove afterwards
     }
 
     // Called from the Attack/Action buttons
@@ -111,6 +126,7 @@ public class Code_Player : MonoBehaviour {
 
     // Is called when mayMove is false and translates the PC into it's appropraite direction. Until mayMove is true again
     private void Knockback() {
+        // If there's a updraft when coming into contact with other players, swap transform.Translate with rigidbod.velocity
         transform.Translate(knockbackDir * knockbackSpeed * KnockbackMultiplier() * Time.deltaTime, Space.World);
         KnockbackSmoother();
     }
@@ -167,6 +183,7 @@ public class Code_Player : MonoBehaviour {
         startKnockbackSpeed = knockbackSpeed;
         playerAnim = GetComponentInChildren<Animator>();
         shieldCode = shield.GetComponent<Code_Shield>();
+        rigidbod = GetComponent<Rigidbody>();
     }
 
     // Is the only Function that call StartKnockback() and should be removed/changed once the shields are being implemented

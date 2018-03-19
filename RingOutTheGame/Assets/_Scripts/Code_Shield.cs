@@ -8,6 +8,8 @@ public class Code_Shield : MonoBehaviour {
     private BoxCollider myCol;
     private Code_Player playerCode; // The Code_Player component on the parent of this shield
     public GameObject parentPlayer; // Has to be the parent with the Code_Player component
+    private string playerTag = "Player"; // A tag that we are looking for when hitting an object, just meant for microoptimisation
+    private string shieldTag = "Shield"; // A tag we are looking for when hitting an object, just meant for microoptimisation
 
     // Use this for initialization
     void Start() {
@@ -37,10 +39,7 @@ public class Code_Shield : MonoBehaviour {
     public void OnTriggerEnter(Collider col) {
         Transform colTrans = col.transform;
         if (col.gameObject != parentPlayer) {            
-            if (colTrans.tag == "Player") {
-                colTrans.GetComponent<Code_Player>().StartKnockback(transform.position);
-            }
-            else if (colTrans.tag == "Shield") {
+            if (colTrans.CompareTag(playerTag) || colTrans.CompareTag(shieldTag)) {
                 colTrans.GetComponent<Code_Player>().StartKnockback(transform.position);
             }
         }
