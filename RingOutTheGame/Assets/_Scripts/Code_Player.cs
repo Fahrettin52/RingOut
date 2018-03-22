@@ -70,7 +70,10 @@ public class Code_Player : MonoBehaviour {
                 break;
             case MoveState.Attacking:
                 // TODO determine what the player can do whilst he's attacking or whether he shouldn't be able to do anything else
-                break;            
+                break;
+            case MoveState.Death:
+                // TODO Find something meaningful?
+                break;
         }     
 
         if (stamina < startStamina) {
@@ -146,13 +149,14 @@ public class Code_Player : MonoBehaviour {
         SwitchMoveState(MoveState.Knockedback);
         // Play Knockedback animation
         playerAnim.SetTrigger("Knockedback");
+        // Start countdown Coroutine
         StartCoroutine(KnockbackCountdown());
     }
 
     // Is called when mayMove is false and translates the PC into it's appropraite direction. Until mayMove is true again
     private void Knockback() {
-        // If there's a updraft when coming into contact with other players, swap transform.Translate with rigidbod.velocity
-        transform.Translate(knockbackDir * knockbackSpeed * KnockbackMultiplier() * Time.deltaTime, Space.World);
+        rigidbod.velocity = knockbackDir * knockbackSpeed * KnockbackMultiplier();
+        print("My Velocity = " + rigidbod.velocity);
         KnockbackSmoother();
     }
 

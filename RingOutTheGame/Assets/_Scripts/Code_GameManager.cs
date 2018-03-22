@@ -8,7 +8,7 @@ public class Code_GameManager : MonoBehaviour {
     private List<GameObject> activePlayers = new List<GameObject>(); // List of players that are playing the game
     public GameObject[] spawnLocations; // Array of array of spawn locations, based on the chosen amount of players
     private List<Vector3> spawnPosition = new List<Vector3>(); // Private list of Vector3 children objects in the items of spawnLocations
-    public int playersSelected; // The amount of players selected to play the game
+    private int playersSelected; // The amount of players selected to play the game
     private int oldPlayersSelected; // Value that saves the playerSelected, so it can compare it later on
 
     [Header("PlayerSelect")]
@@ -25,19 +25,24 @@ public class Code_GameManager : MonoBehaviour {
     public Text victoryMessageText; // Message holder in the VictoryBanner GameObject
     public string victoryMessage; // Message that precedes the victors name
 
-    void Start () {
-        countdownSecondsSaved = countdownSeconds;
-        OpenSelectPlayersMenu();
+    void Start() {
+        TogglePause();
     }
 
-    // Activates the menu where the player can select the amount of players
-    private void OpenSelectPlayersMenu() {
-        playerSelectMenu.SetActive(true);
+    // Centralization of turning pause on and off
+    private void TogglePause() {
+        if (Time.timeScale == 1) {
+            Time.timeScale = 0;
+        }
+        else {
+            Time.timeScale = 1;
+        }
     }
 
     // Player Selected a number of participants through the PlayerSelectMenu
     public void SelectedNumberOfPlayers(int numberOfPlayers) {
         playersSelected = numberOfPlayers;
+        countdownSecondsSaved = countdownSeconds;
 
         // Selects which spawnpoint position should be used
         FillSpawnPositions();
@@ -53,7 +58,7 @@ public class Code_GameManager : MonoBehaviour {
     private void FillSpawnPositions() {
         if (oldPlayersSelected != playersSelected) {
             spawnPosition.Clear();
-            foreach (Transform child in spawnLocations[playersSelected].transform) {
+            foreach (Transform child in spawnLocations[playersSelected-2].transform) {
                 spawnPosition.Add(child.position);
             }
 
@@ -71,6 +76,9 @@ public class Code_GameManager : MonoBehaviour {
 
     // Activates the necessary amount of players
     public void SpawnPlayers() {
+        // Turn of player select menu
+        playerSelectMenu.SetActive(false);
+
         // Places the players on their respective spawn location
         for (int i = 0; i < activePlayers.Count; i++) {
             activePlayers[i].transform.position = spawnPosition[i];
@@ -81,6 +89,9 @@ public class Code_GameManager : MonoBehaviour {
             player.SetActive(true);
         }
 
+        // Toggle pause
+        TogglePause();
+
         // Starts the countdown of the game
         StartCoroutine(StartGameCountdown());
     }
@@ -88,14 +99,12 @@ public class Code_GameManager : MonoBehaviour {
     // Countdown to the players being able to start playing
     private IEnumerator StartGameCountdown() {
         // Sets the adequate variables to desired values;
-        int curSeconds = 0;
         countdownBanner.SetActive(true);
         
         // A countdown system using the while loop
-        while (curSeconds < countdownSeconds) {
+        while (countdownSeconds != 0) {
             countdownText.text = countdownSeconds.ToString();            
             countdownSeconds--;
-            curSeconds++;
             yield return new WaitForSeconds(1f);
         }
 

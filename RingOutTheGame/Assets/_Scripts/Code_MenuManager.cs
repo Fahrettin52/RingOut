@@ -6,11 +6,13 @@ using UnityEngine.UI;
 
 public class Code_MenuManager : MonoBehaviour {
 
+    public List<GameObject> playerSelectMenuButtons = new List<GameObject>();
     public List<GameObject> mainMenuButtons = new List<GameObject>();
     public List<GameObject> settingsButtons = new List<GameObject>();
     public List<GameObject> controlButtons = new List<GameObject>();
     public List<GameObject> confirmQuitButtons = new List<GameObject>();
 
+    public GameObject playerSelectMenu;
     public GameObject mainMenuBorder;
     public GameObject settingsMenu;
     public GameObject controlsMenu;
@@ -19,10 +21,9 @@ public class Code_MenuManager : MonoBehaviour {
 
     public EventSystem eventSystem;
 
-    public bool pauseToggle;
-
     /// Use this for initialization
     public void Start() {
+        
         InitializeMenu();
     }
 
@@ -30,6 +31,7 @@ public class Code_MenuManager : MonoBehaviour {
     /// Initializes the game
     /// </summary>
     public virtual void InitializeMenu() {
+
         foreach (Transform item in mainMenuBorder.transform) {
             if (item.GetComponent<Button>() != null) {
                 mainMenuButtons.Add(item.gameObject);
@@ -57,8 +59,6 @@ public class Code_MenuManager : MonoBehaviour {
         if (mainMenuBorder.activeSelf != false) {
             PickFirstButton(mainMenuButtons, mainMenuBorder.activeSelf, 0);
         }
-
-        pauseToggle = false;
     }
 
     /// <summary>
@@ -90,6 +90,10 @@ public class Code_MenuManager : MonoBehaviour {
                 confirmQuit.SetActive(!confirmQuit.activeSelf);
                 PickFirstButton(confirmQuitButtons, !confirmQuit.activeSelf, number);
                 break;
+            case 4:
+                playerSelectMenu.SetActive(!playerSelectMenu.activeSelf);
+                PickFirstButton(playerSelectMenuButtons, !playerSelectMenu.activeSelf, number);
+                break;
 
             default:
                 break;
@@ -115,13 +119,12 @@ public class Code_MenuManager : MonoBehaviour {
     /// Pause the game
     /// </summary>
     public void Pause() {
-        if (pauseToggle) {
+        if (Time.timeScale == 0) {
             Time.timeScale = 1;
         }
         else { 
             Time.timeScale = 0;
         }
-        pauseToggle = !pauseToggle;
     }
 
     /// <summary>
