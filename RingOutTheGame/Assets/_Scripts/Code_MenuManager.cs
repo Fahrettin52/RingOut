@@ -15,6 +15,7 @@ public class Code_MenuManager : MonoBehaviour {
     public GameObject settingsMenu;
     public GameObject controlsMenu;
     public GameObject confirmQuit;
+    public GameObject soundManager;
 
     public EventSystem eventSystem;
 
