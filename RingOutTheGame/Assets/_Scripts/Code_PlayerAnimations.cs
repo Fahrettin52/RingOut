@@ -12,6 +12,6 @@ public class Code_PlayerAnimations : MonoBehaviour {
 
     // Called from any player gameobject specific code
     public void CallAnimationEnded() {
-        playerParent.AnimationEnded();
+        playerParent.NormalizeMoveState();
     }
 }

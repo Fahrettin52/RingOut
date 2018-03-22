@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Code_Arena : MonoBehaviour {
+    public GameObject gameMng; // The GameMng GameObject in the scene
 
     [Header("Blinking Process")]
     public float wholeBlinkingTime;
@@ -114,6 +115,7 @@ public class Code_Arena : MonoBehaviour {
     public void OnTriggerEnter(Collider col) {
         if (col.transform.CompareTag("Player")) {
             col.GetComponent<Code_Player>().Die();
+            gameMng.GetComponent<Code_GameManager>().CheckForVictory(col.transform.gameObject);
         }
     }
 }

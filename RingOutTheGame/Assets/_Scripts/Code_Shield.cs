@@ -32,7 +32,7 @@ public class Code_Shield : MonoBehaviour {
 
     // Signals its parent that the attack animation has stopped
     public void AttackEnds() {
-        playerCode.AnimationEnded();
+        playerCode.NormalizeMoveState();
     }
 
     // When the shield touches a player it "knocks back the player"

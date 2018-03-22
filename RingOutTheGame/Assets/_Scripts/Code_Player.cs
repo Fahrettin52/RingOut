@@ -6,10 +6,10 @@ public class Code_Player : MonoBehaviour {
     public bool keyboardControlled; // Test variable to make sure only one is controlled by player.
 
     private enum MoveState {
+        Death,
         Normal,
         Knockedback,
-        Attacking,
-        Death
+        Attacking        
     }
     private MoveState moveState;
 
@@ -188,8 +188,9 @@ public class Code_Player : MonoBehaviour {
         moveState = newMoveState;
     }
 
-    // When an animation sequence (like being knocked back or attacking) has ended and the moveState requires to be Normal again
-    public void AnimationEnded() {
+    // Called from the GameMng GameObject in the scene. Also is called when an animation sequence (like being knocked back or attacking) has ended.
+    // Allows the players to move after the countdown
+    public void NormalizeMoveState() {
         SwitchMoveState(MoveState.Normal);
     }
 
