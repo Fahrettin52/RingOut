@@ -14,6 +14,9 @@ public class Code_GameManager : MonoBehaviour {
     [Header("PlayerSelect")]
     public GameObject playerSelectMenu; // Menu for the player selection screen
 
+    [Header("Sound")]
+    public Code_SoundManager soundMng; // The sound manager
+
     [Header("Countdown")]
     public float countdownSeconds; // How long the countdown will take
     private float countdownSecondsSaved; // Saves the countdownSeconds so it can be reset
@@ -49,6 +52,10 @@ public class Code_GameManager : MonoBehaviour {
 
         // Determines how many players are being activated
         FillActivePlayerList();
+
+        // Changes the background music
+        soundMng.TurnOffSelectedSound(0);
+        soundMng.PlayAmbientMusic();
 
         // Spawns the players to their respective spawnPoint
         SpawnPlayers();

@@ -1205,6 +1205,7 @@ MonoBehaviour:
   - {fileID: 24300329}
   - {fileID: 1638837474}
   playerSelectMenu: {fileID: 1023608223}
+  soundMng: {fileID: 1384197451}
   countdownSeconds: 3
   countdownBanner: {fileID: 274553989}
   countdownText: {fileID: 1613956428}
@@ -1924,7 +1925,7 @@ Prefab:
     - target: {fileID: 114559492071315086, guid: de9a67168feb5114aba4a73e16e6fbda,
         type: 2}
       propertyPath: keyboardControlled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114559492071315086, guid: de9a67168feb5114aba4a73e16e6fbda,
         type: 2}
@@ -1959,6 +1960,11 @@ Prefab:
         type: 2}
       propertyPath: knockbackMultiplierList.Array.data[3]
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114559492071315086, guid: de9a67168feb5114aba4a73e16e6fbda,
+        type: 2}
+      propertyPath: movementSpeed
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: de9a67168feb5114aba4a73e16e6fbda, type: 2}
@@ -5372,6 +5378,16 @@ Prefab:
       propertyPath: knockbackMultiplierList.Array.data[3]
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114559492071315086, guid: de9a67168feb5114aba4a73e16e6fbda,
+        type: 2}
+      propertyPath: movementSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114559492071315086, guid: de9a67168feb5114aba4a73e16e6fbda,
+        type: 2}
+      propertyPath: maxSpeed
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: de9a67168feb5114aba4a73e16e6fbda, type: 2}
   m_IsPrefabParent: 0
@@ -6401,6 +6417,16 @@ Prefab:
       propertyPath: knockbackMultiplierList.Array.data[3]
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114559492071315086, guid: de9a67168feb5114aba4a73e16e6fbda,
+        type: 2}
+      propertyPath: movementSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114559492071315086, guid: de9a67168feb5114aba4a73e16e6fbda,
+        type: 2}
+      propertyPath: maxSpeed
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: de9a67168feb5114aba4a73e16e6fbda, type: 2}
   m_IsPrefabParent: 0
@@ -6457,7 +6483,7 @@ Prefab:
         type: 2}
       propertyPath: musicAudioClip.Array.data[0]
       value: 
-      objectReference: {fileID: 8300000, guid: e73cd20b9edbc12408d5da1826695a9e, type: 3}
+      objectReference: {fileID: 8300000, guid: f2f18eca6e0a4ed4a9dbc29e171ed703, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a73081585608a9a4f9e944414a2c36ef, type: 2}
   m_IsPrefabParent: 0
@@ -6591,6 +6617,16 @@ Prefab:
         type: 2}
       propertyPath: knockbackMultiplierList.Array.data[3]
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114559492071315086, guid: de9a67168feb5114aba4a73e16e6fbda,
+        type: 2}
+      propertyPath: movementSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114559492071315086, guid: de9a67168feb5114aba4a73e16e6fbda,
+        type: 2}
+      propertyPath: maxSpeed
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: de9a67168feb5114aba4a73e16e6fbda, type: 2}

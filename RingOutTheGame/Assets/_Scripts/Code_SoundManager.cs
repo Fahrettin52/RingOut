@@ -59,6 +59,11 @@ public class Code_SoundManager : MonoBehaviour
         sFXAudioSource[2].Play();
     }
 
+    public void PlayAmbientMusic()
+    {
+        ambientAudioSource[0].Play();
+    }
+
     public void TurnOffSelectedSound(int index)
     {
         switch (index)
