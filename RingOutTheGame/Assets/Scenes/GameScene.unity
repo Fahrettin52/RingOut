@@ -2711,6 +2711,7 @@ MonoBehaviour:
   confirmQuit: {fileID: 769927131}
   soundManager: {fileID: 1384197445}
   eventSystem: {fileID: 430622912}
+  soundMng: {fileID: 1384197451}
 --- !u!1 &618928121
 GameObject:
   m_ObjectHideFlags: 0

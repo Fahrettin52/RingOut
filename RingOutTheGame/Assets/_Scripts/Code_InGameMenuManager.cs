@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 public class Code_InGameMenuManager : Code_MenuManager
 {
+    public Code_SoundManager soundMng; // The sound manager 
 
     // Update is called once per frame
     void Update()
@@ -82,5 +83,26 @@ public class Code_InGameMenuManager : Code_MenuManager
     public override void LoadGameScene(int scene) {        
         SceneManager.LoadScene(scene);
         Pause();
+    }
+
+    /// <summary>
+    /// Pause the game
+    /// </summary>
+    public override void Pause()
+    {
+        if (Time.timeScale == 0)
+        {
+            Time.timeScale = 1;
+            soundMng.TurnOffSelectedSound(2);
+            soundMng.TurnOffSelectedSound(0);
+            soundMng.PlayAmbientMusic();
+        }
+        else
+        {
+            Time.timeScale = 0;
+            soundMng.TurnOffSelectedSound(2);
+            soundMng.TurnOffSelectedSound(0);
+            soundMng.PlayBackgroundMusic();
+        }
     }
 }

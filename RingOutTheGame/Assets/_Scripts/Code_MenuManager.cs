@@ -118,7 +118,7 @@ public class Code_MenuManager : MonoBehaviour {
     /// <summary>
     /// Pause the game
     /// </summary>
-    public void Pause() {
+    public virtual void Pause() {
         if (Time.timeScale == 0) {
             Time.timeScale = 1;
         }
