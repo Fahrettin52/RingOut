@@ -6,11 +6,11 @@ using System.Collections.Generic;
 public class Code_InGameMenuManager : Code_MenuManager
 {
     public Code_SoundManager soundMng; // The sound manager 
+    public bool allowStart;
 
     // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetButtonDown("StartButton") && !playerSelectMenu.activeSelf)
+    void Update() {
+        if (Input.GetButtonDown("StartButton") && !playerSelectMenu.activeSelf && allowStart)
         {
             if (!CheckMenuElements())
             {

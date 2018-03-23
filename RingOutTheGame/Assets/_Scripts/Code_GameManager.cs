@@ -11,6 +11,9 @@ public class Code_GameManager : MonoBehaviour {
     private int playersSelected; // The amount of players selected to play the game
     private int oldPlayersSelected; // Value that saves the playerSelected, so it can compare it later on
 
+    [Header("Ingame Menu")]
+    public Code_InGameMenuManager ingameMng; // The Code_IngameManager in the scene
+
     [Header("PlayerSelect")]
     public GameObject playerSelectMenu; // Menu for the player selection screen
 
@@ -118,6 +121,9 @@ public class Code_GameManager : MonoBehaviour {
         // Resets the necessary variables for later reuse
         countdownBanner.SetActive(false);
         countdownSeconds = countdownSecondsSaved;
+
+        // Activates the IngameMenuManager
+        ingameMng.allowStart = true;
 
         // Allows all players to finally start playing
         AllowMovement();

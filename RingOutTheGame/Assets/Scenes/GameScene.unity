@@ -1204,6 +1204,7 @@ MonoBehaviour:
   - {fileID: 1846398850}
   - {fileID: 24300329}
   - {fileID: 1638837474}
+  ingameMng: {fileID: 589232643}
   playerSelectMenu: {fileID: 1023608223}
   soundMng: {fileID: 1384197451}
   countdownSeconds: 3
@@ -2712,6 +2713,7 @@ MonoBehaviour:
   soundManager: {fileID: 1384197445}
   eventSystem: {fileID: 430622912}
   soundMng: {fileID: 1384197451}
+  allowStart: 0
 --- !u!1 &618928121
 GameObject:
   m_ObjectHideFlags: 0
@@ -6448,6 +6450,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114895126480034902, guid: a73081585608a9a4f9e944414a2c36ef,
+        type: 2}
+      propertyPath: volumeChecks.Array.size
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4063350531360270, guid: a73081585608a9a4f9e944414a2c36ef, type: 2}
       propertyPath: m_LocalPosition.x
       value: 8.108772
@@ -6485,6 +6492,31 @@ Prefab:
       propertyPath: musicAudioClip.Array.data[0]
       value: 
       objectReference: {fileID: 8300000, guid: f2f18eca6e0a4ed4a9dbc29e171ed703, type: 3}
+    - target: {fileID: 114895126480034902, guid: a73081585608a9a4f9e944414a2c36ef,
+        type: 2}
+      propertyPath: volumeChecks.Array.data[0]
+      value: 
+      objectReference: {fileID: 1781081022}
+    - target: {fileID: 114895126480034902, guid: a73081585608a9a4f9e944414a2c36ef,
+        type: 2}
+      propertyPath: volumeChecks.Array.data[1]
+      value: 
+      objectReference: {fileID: 1323374705}
+    - target: {fileID: 114895126480034902, guid: a73081585608a9a4f9e944414a2c36ef,
+        type: 2}
+      propertyPath: volumeChecks.Array.data[2]
+      value: 
+      objectReference: {fileID: 84814622}
+    - target: {fileID: 114895126480034902, guid: a73081585608a9a4f9e944414a2c36ef,
+        type: 2}
+      propertyPath: volumeChecks.Array.data[3]
+      value: 
+      objectReference: {fileID: 9684524}
+    - target: {fileID: 114895126480034902, guid: a73081585608a9a4f9e944414a2c36ef,
+        type: 2}
+      propertyPath: volumeChecks.Array.data[4]
+      value: 
+      objectReference: {fileID: 1548443194}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a73081585608a9a4f9e944414a2c36ef, type: 2}
   m_IsPrefabParent: 0

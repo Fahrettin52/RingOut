@@ -540,6 +540,11 @@ Prefab:
       propertyPath: soundManager
       value: 
       objectReference: {fileID: 2121469100}
+    - target: {fileID: 114702468233324270, guid: 844a27ccdd900ad4cb9280c4302a2145,
+        type: 2}
+      propertyPath: playerSelectMenu
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 844a27ccdd900ad4cb9280c4302a2145, type: 2}
   m_IsPrefabParent: 0
