@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Shield
   - Ground
+  - GameMng
   layers:
   - Default
   - TransparentFX

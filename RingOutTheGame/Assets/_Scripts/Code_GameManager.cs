@@ -11,7 +11,12 @@ public class Code_GameManager : MonoBehaviour {
     private List<Vector3> spawnPosition = new List<Vector3>(); // Private list of Vector3 children objects in the items of spawnLocations
     private int playersSelected; // The amount of players selected to play the game
     private int oldPlayersSelected; // Value that saves the playerSelected, so it can compare it later on    
+
+    [Header("Arena")]
     public Code_Arena arena; // The arena in the scene
+    public GameObject arenaPrefab; // Prefab for the arena
+    public string arenaName; // To name the newly instantiated arena
+    private GameObject newArena; // To save the instantiated arena
 
     [Header("Ingame Menu")]
     public Code_InGameMenuManager ingameMng; // The Code_IngameManager in the scene
@@ -174,13 +179,13 @@ public class Code_GameManager : MonoBehaviour {
         // Set all players to non-active
         FillActivePlayerList();
 
-        //// Turns of all the players
-        //foreach (GameObject player in activePlayers) {
-        //    player.SetActive(false);
-        //}
+        // Destroy the arena
+        Destroy(arena.gameObject);
 
-        // Reset the arenaParts
-        arena.ResetArena();
+        // Instantiate the new one
+        newArena = Instantiate(arenaPrefab, Vector3.zero, Quaternion.identity);
+        newArena.name = arenaName;
+        arena = newArena.GetComponent<Code_Arena>();
 
         // Call SpawnPlayers
         SpawnPlayers();

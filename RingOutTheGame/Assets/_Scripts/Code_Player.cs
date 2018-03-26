@@ -5,14 +5,14 @@ public class Code_Player : MonoBehaviour {
 
     public bool keyboardControlled; // Test variable to make sure only one is controlled by player.
 
-    private enum MoveState {
+    public enum MoveState {
         Death,
         Normal,
         Knockedback,
         Attacking,       
         Victory
     }
-    private MoveState moveState;
+    public MoveState moveState;
 
     public GameObject shield; // The PCs connectec shield
     private Code_Shield shieldCode; // the Code_Shield component on the shield child
@@ -163,11 +163,17 @@ public class Code_Player : MonoBehaviour {
     //// Starts the knockback sequence
     public void StartKnockback(Vector3 hitPosition) {
         // Calculate the knockBackDir
-        knockbackDir = hitPosition - transform.position;  
+        knockbackDir = hitPosition - transform.position;
+        knockbackDir.y = 0;
+        knockbackDir.Normalize();
+        print("knockback Dir = " + knockbackDir);
+        
         // Disallow movement
         SwitchMoveState(MoveState.Knockedback);
+
         // Play Knockedback animation
         playerAnim.SetTrigger("Knockedback");
+
         // Start countdown Coroutine
         StartCoroutine(KnockbackCountdown());
     }
