@@ -35,17 +35,17 @@ public class Code_Arena : MonoBehaviour {
         FillArenaPartsList();
     }
 
-    // Starts the WHOLE crumble of the arena, acts as if it's the first time
-    public void StartCrumble() {
-        crumbleTimer = StartCoroutine(CrumbleTimer(initialCrumbleTime));
-    }
-
     // Fills the arenaParts List
     private void FillArenaPartsList() {
         foreach (Transform child in transform) {
             arenaParts.Add(child);
         }
     }
+
+    // Starts the WHOLE crumble of the arena, acts as if it's the first time
+    public void StartCrumble() {
+        crumbleTimer = StartCoroutine(CrumbleTimer(initialCrumbleTime));
+    }   
 
     // Counts down for each part that'll crumble
     private IEnumerator CrumbleTimer(float crumbleTimer) {

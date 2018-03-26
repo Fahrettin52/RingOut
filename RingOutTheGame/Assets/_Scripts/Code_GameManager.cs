@@ -169,6 +169,7 @@ public class Code_GameManager : MonoBehaviour {
         TogglePause();
     }
     
+    // Restarts when the game with the same amount of players
     public void RestartWithSameNumbers() {
         // Set all players to non-active
         FillActivePlayerList();
@@ -183,7 +184,5 @@ public class Code_GameManager : MonoBehaviour {
 
         // Call SpawnPlayers
         SpawnPlayers();
-    }
-
-    
+    }    
 }
