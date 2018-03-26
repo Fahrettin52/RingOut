@@ -16,7 +16,7 @@ public class Code_Player : MonoBehaviour {
     public GameObject shield; // The PCs connectec shield
     private Code_Shield shieldCode; // the Code_Shield component on the shield child
     public int movementSpeed;
-    public int maxSpeed; // Determines the maximu amount the player is allowed to move
+    public int maxSpeed; // Determines the maximum amount the player is allowed to move
     public int rotationSpeed;
     public int playerNumber;
     private string playerNumberString;
@@ -33,8 +33,6 @@ public class Code_Player : MonoBehaviour {
     private int startKnockbackSpeed;
 
     public float knockbackTime; // How long the knockback effect lasts
-    public float smoothingRate; // Determines how smoothly the knockbackSpeed decreases in value. Advised to be 10f
-    private float knockbackDecreaser;
     private float staminaRegen;
 
     [Header("Based on players remaining stamina")]
@@ -57,16 +55,14 @@ public class Code_Player : MonoBehaviour {
         switch (moveState) {
             case MoveState.Normal:
                 if (!keyboardControlled) {
-                    Movement();
                     Attack();
                 }
                 else {
-                    MovementKeyboard(); // TODO remove this after testing phase
                     AttackKeyboard(); // TODO remove this after testing phase
                 }
                 break;
             case MoveState.Knockedback:
-                Knockback();
+                // Find something non-Physics related todo for the code (?)
                 break;
             case MoveState.Attacking:
                 // TODO determine what the player can do whilst he's attacking or whether he shouldn't be able to do anything else
@@ -74,20 +70,35 @@ public class Code_Player : MonoBehaviour {
             case MoveState.Death:
                 // TODO Find something meaningful?
                 break;
-        }     
+        }
 
         if (stamina < startStamina) {
             StaminaRegen();
         }
     }
 
-    /// <summary>
-    /// Handles the movement and rotation of the player
-    /// </summary>
-    private void Movement() {        
-        Vector3 move = new Vector3(
-            Input.GetAxis("Horizontal" + playerNumberString) * movementSpeed, 
-            rigidbod.velocity.y, 
+    // TODO Split the current player movement into two parts, player Input in the Üpdate and Physics calculations in the FixedUpdate
+    void FixedUpdate() {
+        switch (moveState) {
+            case MoveState.Normal:
+                if (!keyboardControlled) {
+                    Movement();
+                }
+                else {
+                    MovementKeyboard(); // TODO remove this after testing phase
+                }
+                break;
+            case MoveState.Knockedback:
+                Knockback();
+                break;
+        }
+    }
+
+    //Replace this with the content in KeyboardMovement()
+    private void Movement() {
+        Vector3 move = new Vector3( // TODO Make sure that this value does not have to be called from the Update
+            Input.GetAxis("Horizontal" + playerNumberString) * movementSpeed,
+            rigidbod.velocity.y,
             Input.GetAxis("Vertical" + playerNumberString) * movementSpeed
         );
 
@@ -110,19 +121,23 @@ public class Code_Player : MonoBehaviour {
         }
     }
 
-    // TODO remove this function after testing
+    //// TODO remove this function after testing
     private void MovementKeyboard() {
-        Vector3 moveTest = new Vector3(
-            Input.GetAxis("HorizontalKeyboard") * movementSpeed, 
-            rigidbod.velocity.y, 
+        // Save the inputted axis in a Vector3
+        Vector3 move = new Vector3(
+            Input.GetAxis("HorizontalKeyboard") * movementSpeed,
+            0,
             Input.GetAxis("VerticalKeyboard") * movementSpeed
-        ); 
+        );
 
-        if (moveTest != Vector3.zero) {
-            transform.rotation = Quaternion.LookRotation(moveTest * Time.deltaTime);
+        // Rotates the player according to the inputted axis
+        if (move.x != 0 || move.z != 0) {
+            rigidbod.rotation = Quaternion.LookRotation(move * Time.deltaTime);
         }
 
-        rigidbod.velocity = moveTest;
+        // Moves the player according to the inputted axis
+        rigidbod.AddForce(move * movementSpeed);
+        rigidbod.velocity = Vector3.ClampMagnitude(rigidbod.velocity, maxSpeed);
     }
 
     // TODO remove this function after testing
@@ -137,14 +152,10 @@ public class Code_Player : MonoBehaviour {
         }
     }
 
-    // Starts the knockback sequence
+    //// Starts the knockback sequence
     public void StartKnockback(Vector3 hitPosition) {
         // Calculate the knockBackDir
-        knockbackDir = hitPosition - transform.position;
-        knockbackDir = -knockbackDir.normalized;
-        // Controls the players "hop" in the air
-        knockbackDir.y = 0f;
-
+        knockbackDir = hitPosition - transform.position;  
         // Disallow movement
         SwitchMoveState(MoveState.Knockedback);
         // Play Knockedback animation
@@ -155,25 +166,16 @@ public class Code_Player : MonoBehaviour {
 
     // Is called when mayMove is false and translates the PC into it's appropraite direction. Until mayMove is true again
     private void Knockback() {
-        rigidbod.velocity = knockbackDir * knockbackSpeed * KnockbackMultiplier();
-        print("My Velocity = " + rigidbod.velocity);
-        KnockbackSmoother();
-    }
-
-    // Smooths out the knockback for a bit
-    private void KnockbackSmoother() {
-        if (Time.time > knockbackDecreaser) {
-            knockbackSpeed--;
-            knockbackDecreaser = Time.time + (knockbackTime / smoothingRate);
-        }
+        // Moves the player as if he got knocked backwards
+        rigidbod.AddForce(-knockbackDir * movementSpeed * knockbackSpeed * KnockbackMultiplier());
+        rigidbod.velocity = Vector3.ClampMagnitude(rigidbod.velocity, maxSpeed);
     }
 
     // Countdown for knockback. When it's done it resets the appropriate variables and call ToggleMayMove()
-    private IEnumerator KnockbackCountdown() {
+    private IEnumerator KnockbackCountdown() { 
         yield return new WaitForSeconds(knockbackTime);
         knockbackSpeed = startKnockbackSpeed;
         playerAnim.SetTrigger("KnockbackHalted");
-        //SwitchMoveState(MoveState.Normal); // TODO replace this through an event key in the KnockbackHalt animation
     }
 
     // Increases the knockbackSpeed depending on how much stamina the PC has left.
@@ -217,7 +219,8 @@ public class Code_Player : MonoBehaviour {
     }
 
     // When the player falls off the arena
-    public void Die() { // TODO fill this function with more functionality regarding dieing
+    public void Die() { 
+        // TODO fill this function with more functionality regarding dieing
         SwitchMoveState(MoveState.Death);
         rigidbod.velocity = new Vector3(0f, rigidbod.velocity.y, 0f);
     }

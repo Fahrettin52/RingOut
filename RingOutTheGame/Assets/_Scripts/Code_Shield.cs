@@ -38,7 +38,7 @@ public class Code_Shield : MonoBehaviour {
     // When the shield touches a player it "knocks back the player"
     public void OnTriggerEnter(Collider col) {
         Transform colTrans = col.transform;
-        if (col.gameObject != parentPlayer) {            
+        if (col.gameObject != parentPlayer) {
             if (colTrans.CompareTag(playerTag) || colTrans.CompareTag(shieldTag)) {
                 colTrans.GetComponent<Code_Player>().StartKnockback(transform.position);
             }

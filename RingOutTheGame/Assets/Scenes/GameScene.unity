@@ -1931,7 +1931,7 @@ Prefab:
     - target: {fileID: 114559492071315086, guid: de9a67168feb5114aba4a73e16e6fbda,
         type: 2}
       propertyPath: maxSpeed
-      value: 2
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1936532488741708, guid: de9a67168feb5114aba4a73e16e6fbda, type: 2}
       propertyPath: m_IsActive
@@ -1966,6 +1966,11 @@ Prefab:
         type: 2}
       propertyPath: movementSpeed
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114559492071315086, guid: de9a67168feb5114aba4a73e16e6fbda,
+        type: 2}
+      propertyPath: staminaRegenAmount
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: de9a67168feb5114aba4a73e16e6fbda, type: 2}
@@ -5389,6 +5394,11 @@ Prefab:
     - target: {fileID: 114559492071315086, guid: de9a67168feb5114aba4a73e16e6fbda,
         type: 2}
       propertyPath: maxSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114559492071315086, guid: de9a67168feb5114aba4a73e16e6fbda,
+        type: 2}
+      propertyPath: staminaRegenAmount
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -6428,6 +6438,11 @@ Prefab:
     - target: {fileID: 114559492071315086, guid: de9a67168feb5114aba4a73e16e6fbda,
         type: 2}
       propertyPath: maxSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114559492071315086, guid: de9a67168feb5114aba4a73e16e6fbda,
+        type: 2}
+      propertyPath: staminaRegenAmount
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -6620,7 +6635,7 @@ Prefab:
     - target: {fileID: 114559492071315086, guid: de9a67168feb5114aba4a73e16e6fbda,
         type: 2}
       propertyPath: keyboardControlled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1936532488741708, guid: de9a67168feb5114aba4a73e16e6fbda, type: 2}
       propertyPath: m_IsActive
@@ -6659,6 +6674,27 @@ Prefab:
     - target: {fileID: 114559492071315086, guid: de9a67168feb5114aba4a73e16e6fbda,
         type: 2}
       propertyPath: maxSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639853404266580, guid: de9a67168feb5114aba4a73e16e6fbda, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639853404266580, guid: de9a67168feb5114aba4a73e16e6fbda, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639853404266580, guid: de9a67168feb5114aba4a73e16e6fbda, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1120269574293344, guid: de9a67168feb5114aba4a73e16e6fbda, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114559492071315086, guid: de9a67168feb5114aba4a73e16e6fbda,
+        type: 2}
+      propertyPath: staminaRegenAmount
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
