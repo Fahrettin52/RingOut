@@ -1,178 +1,157 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class Code_SoundManager : MonoBehaviour
-{
+public class Code_SoundManager : MonoBehaviour {
 
-    public AudioSource[] musicAudioSource;
-    public AudioSource[] sFXAudioSource;
-    public AudioSource[] ambientAudioSource;
-    public AudioSource[] characterAudioSource;
+    public AudioSource[] musicAudioSource; // Audiosource that controls the music sounds
+    public AudioSource[] sFXAudioSource; // Audiosource that controls the sfx sounds
+    public AudioSource[] ambientAudioSource; // Audiosource that controls the ambient sounds
+    public AudioSource[] characterAudioSource; // Audiosource that controls the character sounds
 
-    public AudioClip[] musicAudioClip;
-    public AudioClip[] sFXAudioClip;
-    public AudioClip[] ambientAudioClip;
-    public AudioClip[] characterAudioClip;
+    public AudioClip[] musicAudioClip; // The music sounds
+    public AudioClip[] sFXAudioClip; // The SFX sounds
+    public AudioClip[] ambientAudioClip; // The ambient sounds
+    public AudioClip[] characterAudioClip; // The character sounds
 
-    public Toggle[] volumeChecks;
+    public Toggle[] volumeChecks; // An array that contains all the music toggles in the settings menu
 
     // Use this for initialization
-    void Start()
-    {
-        for (int i = 0; i < musicAudioSource.Length; i++)
-        {
+    void Start() {
+        // Store each music audioclip in the music audiosource
+        for (int i = 0; i < musicAudioSource.Length; i++) {
             musicAudioSource[i].clip = musicAudioClip[i];
         }
-
-        for (int i = 0; i < sFXAudioSource.Length; i++)
-        {
+        // Store each sfx audioclip in the sfx audiosource
+        for (int i = 0; i < sFXAudioSource.Length; i++) {
             sFXAudioSource[i].clip = sFXAudioClip[i];
         }
-
-        for (int i = 0; i < ambientAudioSource.Length; i++)
-        {
+        // Store each ambient audioclip in the ambient audiosource
+        for (int i = 0; i < ambientAudioSource.Length; i++) {
             ambientAudioSource[i].clip = ambientAudioClip[i];
         }
-
-        for (int i = 0; i < characterAudioSource.Length; i++)
-        {
+        // Store each character audioclip in the character audiosource
+        for (int i = 0; i < characterAudioSource.Length; i++) {
             characterAudioSource[i].clip = characterAudioClip[i];
         }
-
+        // Call the methode that plays the background music
         PlayBackgroundMusic();
     }
 
-    public void PlayBackgroundMusic()
-    {
+    /// <summary>
+    /// Play the mainmenu music
+    /// </summary>
+    public void PlayBackgroundMusic() {
         musicAudioSource[0].Play();
     }
 
-    public void PlayButtonHover()
-    {
+    /// <summary>
+    /// Play the hover over button sound
+    /// </summary>
+    public void PlayButtonHover() {
         sFXAudioSource[0].Play();
     }
 
-    public void PlayUIConfirmation()
-    {
+    /// <summary>
+    /// Play the confirmation sound
+    /// </summary>
+    public void PlayUIConfirmation() {
         sFXAudioSource[1].Play();
     }
 
-    public void PlayToggleSetting()
-    {
+    /// <summary>
+    /// Play the checkmark sound
+    /// </summary>
+    public void PlayToggleSetting() {
         sFXAudioSource[2].Play();
     }
 
-    public void PlayAmbientMusic()
-    {
+    /// <summary>
+    /// Play the in game ambient music
+    /// </summary>
+    public void PlayAmbientMusic() {
         ambientAudioSource[0].Play();
     }
 
-    public void TurnOffSelectedSound(int index)
-    {
-        if (volumeChecks[0].isOn)
-        {
-            switch (index)
-            {
+    /// <summary>
+    /// Mute or unmute the the chosen audiosource
+    /// </summary>
+    /// <param name="index"></param>
+    public void TurnOffSelectedSound(int index) {
+        // Check if the mastervolumes boolean is true 
+        if (volumeChecks[0].isOn) {
+            switch (index) {
                 case 0:
-                    foreach (AudioSource item in musicAudioSource)
-                    {
+                    // Toggle the music sound
+                    foreach (AudioSource item in musicAudioSource) {
                         item.mute = !item.mute;
                     }
                     break;
-
                 case 1:
-                    foreach (AudioSource item in sFXAudioSource)
-                    {
+                    // Toggle the sfx sound
+                    foreach (AudioSource item in sFXAudioSource) {
                         item.mute = !item.mute;
                     }
                     break;
-
                 case 2:
-                    foreach (AudioSource item in ambientAudioSource)
-                    {
+                    // Toggle the ambient sound
+                    foreach (AudioSource item in ambientAudioSource) {
                         item.mute = !item.mute;
                     }
                     break;
-
                 case 3:
-                    foreach (AudioSource item in characterAudioSource)
-                    {
+                    // Toggle the character sound
+                    foreach (AudioSource item in characterAudioSource) {
                         item.mute = !item.mute;
                     }
                     break;
-
+                // If non of the above methodes are called break the code
                 default:
                     break;
             }
         }
-
     }
 
-    public void TurnOffAllSounds()
-    {
-        if (!volumeChecks[0].isOn)
-        {
-            for (int i = 0; i < musicAudioSource.Length; i++)
-            {
+    /// <summary>
+    /// Turn off all the sounds in game
+    /// </summary>
+    public void TurnOffAllSounds() {
+        // Check if the mastervolumes boolean is true 
+        if (!volumeChecks[0].isOn) {
+            // Mute all the music sounds
+            for (int i = 0; i < musicAudioSource.Length; i++) {
                 musicAudioSource[i].mute = true;
             }
-
-            for (int i = 0; i < sFXAudioSource.Length; i++)
-            {
+            // Mute all the sfx sounds
+            for (int i = 0; i < sFXAudioSource.Length; i++) {
                 sFXAudioSource[i].mute = true;
             }
-
-            for (int i = 0; i < ambientAudioSource.Length; i++)
-            {
+            // Mute all the ambient sounds
+            for (int i = 0; i < ambientAudioSource.Length; i++) {
                 ambientAudioSource[i].mute = true;
             }
-
-            for (int i = 0; i < characterAudioSource.Length; i++)
-            {
+            // Mute all the character sounds
+            for (int i = 0; i < characterAudioSource.Length; i++) {
                 characterAudioSource[i].mute = true;
             }
         }
-        else
-        {
-            for (int i = 0; i < musicAudioSource.Length; i++)
-            {
+        // If the mastervolumes boolean is not rue
+        else { 
+            // Mute or unmute the music audiosource depending on the current state of the corresponding volumecheck item
+            for (int i = 0; i < musicAudioSource.Length; i++) {
                 musicAudioSource[i].mute = !volumeChecks[1].isOn;
             }
-
-            for (int i = 0; i < sFXAudioSource.Length; i++)
-            {
+            // Mute or unmute the sfx audiosource depending on the current state of the corresponding volumecheck item
+            for (int i = 0; i < sFXAudioSource.Length; i++) {
                 sFXAudioSource[i].mute = !volumeChecks[2].isOn;
             }
-
-            for (int i = 0; i < ambientAudioSource.Length; i++)
-            {
+            // Mute or unmute the ambient audiosource depending on the current state of the corresponding volumecheck item
+            for (int i = 0; i < ambientAudioSource.Length; i++) {
                 ambientAudioSource[i].mute = !volumeChecks[3].isOn;
             }
-
-            for (int i = 0; i < characterAudioSource.Length; i++)
-            {
+            // Mute or unmute the character audiosource depending on the current state of the corresponding volumecheck item
+            for (int i = 0; i < characterAudioSource.Length; i++) {
                 characterAudioSource[i].mute = !volumeChecks[4].isOn;
             }
         }
-
-        //for (int i = 0; i < musicAudioSource.Length; i++)
-        //{
-        //    musicAudioSource[i].mute = !musicAudioSource[i].mute;
-        //}
-
-        //for (int i = 0; i < sFXAudioSource.Length; i++)
-        //{
-        //    sFXAudioSource[i].mute = !sFXAudioSource[i].mute;
-        //}
-
-        //for (int i = 0; i < ambientAudioSource.Length; i++)
-        //{
-        //    ambientAudioSource[i].mute = !ambientAudioSource[i].mute;
-        //}
-
-        //for (int i = 0; i < characterAudioSource.Length; i++)
-        //{
-        //    characterAudioSource[i].mute = !characterAudioSource[i].mute;
-        //}
     }
 }
