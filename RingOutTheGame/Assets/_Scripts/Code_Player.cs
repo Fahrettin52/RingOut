@@ -9,7 +9,8 @@ public class Code_Player : MonoBehaviour {
         Death,
         Normal,
         Knockedback,
-        Attacking        
+        Attacking,       
+        Victory
     }
     private MoveState moveState;
 
@@ -70,6 +71,9 @@ public class Code_Player : MonoBehaviour {
             case MoveState.Death:
                 // TODO Find something meaningful?
                 break;
+            case MoveState.Victory:
+                // TODO play victory animation here, or something like that
+                break;
         }
 
         if (stamina < startStamina) {
@@ -96,17 +100,21 @@ public class Code_Player : MonoBehaviour {
 
     //Replace this with the content in KeyboardMovement()
     private void Movement() {
-        Vector3 move = new Vector3( // TODO Make sure that this value does not have to be called from the Update
+        // Save the inputted axis in a Vector3
+        Vector3 move = new Vector3(
             Input.GetAxis("Horizontal" + playerNumberString) * movementSpeed,
-            rigidbod.velocity.y,
+            0,
             Input.GetAxis("Vertical" + playerNumberString) * movementSpeed
         );
 
-        if (move != Vector3.zero) {
-            transform.rotation = Quaternion.LookRotation(move * Time.deltaTime);
+        // Rotates the player according to the inputted axis
+        if (move.x != 0 || move.z != 0) {
+            rigidbod.rotation = Quaternion.LookRotation(move * Time.deltaTime);
         }
 
-        rigidbod.velocity = move;
+        // Moves the player according to the inputted axis
+        rigidbod.AddForce(move * movementSpeed);
+        rigidbod.velocity = Vector3.ClampMagnitude(rigidbod.velocity, maxSpeed);
     }
 
     // Called from the Attack/Action buttons
@@ -198,6 +206,11 @@ public class Code_Player : MonoBehaviour {
     // Allows the players to move after the countdown
     public void NormalizeMoveState() {
         SwitchMoveState(MoveState.Normal);
+    }
+
+    // Is called from the Code_GameManager in the scene whenever this object is declared the victor
+    public void VictoryDance() {
+        SwitchMoveState(MoveState.Victory);
     }
 
     // Regenerates the PCs stamina when it's necesary

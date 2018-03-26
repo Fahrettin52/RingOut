@@ -23,8 +23,12 @@ public class Code_Arena : MonoBehaviour {
     private int currentGroupToCrumble;
     private List<Transform> arenaParts = new List<Transform>();
 
-	// Use this for initialization
-	void Start () {
+    private List<Coroutine> crumbleTimers = new List<Coroutine>();
+    private List<Coroutine> deactivaters = new List<Coroutine>();
+    private List<Coroutine> blinkers = new List<Coroutine>();
+
+    // Use this for initialization
+    void Start () {
         // Safe the arenas y position for later use
         startPos = transform.position.y;
 
@@ -74,13 +78,11 @@ public class Code_Arena : MonoBehaviour {
     }
 
     // Indicates the parts that are about to crumble 
-    public IEnumerator Blink(float waitTime, Transform arenaPart)
-    {        
+    public IEnumerator Blink(float waitTime, Transform arenaPart) {        
         Renderer arenaRenderer = arenaPart.GetComponent<Renderer>();
         Color arenaPartColor = arenaRenderer.material.color;
         float endTime = Time.time + waitTime;
-        while (Time.time < endTime)
-        {
+        while (Time.time < endTime) {
             // PingPongs the color of crumbling arenaPart
             float lerpBlinkingColor = Mathf.PingPong(Time.time, blinkingTime) / blinkingTime;
             arenaRenderer.material.color = Color.Lerp(arenaPartColor, blinkingColor, lerpBlinkingColor); 
@@ -116,6 +118,15 @@ public class Code_Arena : MonoBehaviour {
         if (col.transform.CompareTag("Player")) {
             col.GetComponent<Code_Player>().Die();
             gameMng.GetComponent<Code_GameManager>().CheckForVictory(col.transform.gameObject);
+        }
+    }
+
+    public void ResetArena() {
+        StopAllCoroutines();
+        foreach (Transform part in arenaParts) {
+            if (part.position != Vector3.zero) {
+                part.position = Vector3.zero;
+            }
         }
     }
 }

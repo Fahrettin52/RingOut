@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Code_GameManager : MonoBehaviour {
     public GameObject[] players; // Array of players in the game    
@@ -9,7 +10,7 @@ public class Code_GameManager : MonoBehaviour {
     public GameObject[] spawnLocations; // Array of array of spawn locations, based on the chosen amount of players
     private List<Vector3> spawnPosition = new List<Vector3>(); // Private list of Vector3 children objects in the items of spawnLocations
     private int playersSelected; // The amount of players selected to play the game
-    private int oldPlayersSelected; // Value that saves the playerSelected, so it can compare it later on
+    private int oldPlayersSelected; // Value that saves the playerSelected, so it can compare it later on    
 
     [Header("Ingame Menu")]
     public Code_InGameMenuManager ingameMng; // The Code_IngameManager in the scene
@@ -141,18 +142,41 @@ public class Code_GameManager : MonoBehaviour {
         activePlayers.Remove(deadPlayer);
 
         // TODO If there's UI element that represent the active players, Affect that element that belongs to the fallen player
-
         if (activePlayers.Count == 1) {
+            ingameMng.allowStart = false;
+            activePlayers[0].GetComponent<Code_Player>().VictoryDance();
             AnnounceWinner(activePlayers[0].GetComponent<Code_Player>());
+            StartCoroutine(RestartFromVictory());
         }
     }
 
-    
-
     // Stops the gameplay and announces the winner through the VictoryBanner GameObject
     private void AnnounceWinner(Code_Player winner) {
-        Time.timeScale = 0; // TODO Check for a better location for this snipet of code
+        //Time.timeScale = 0; // TODO Check for a better location for this snipet of code
         victoryBanner.SetActive(true);
         victoryMessageText.text = victoryMessage + winner.playerNumber;
     }
+
+    // Automatically restarts the game after a victory has been declared
+    private IEnumerator RestartFromVictory() {
+        yield return new WaitForSeconds(3f); // TODO replace the 3f with a public variable        
+        victoryBanner.SetActive(false);
+        RestartWithSameNumbers();
+        TogglePause();
+    }
+    
+    public void RestartWithSameNumbers() {
+        // Set all players to non-active
+        FillActivePlayerList();
+
+        //// Turns of all the players
+        //foreach (GameObject player in activePlayers) {
+        //    player.SetActive(false);
+        //}
+
+        // Call SpawnPlayers
+        SpawnPlayers();
+    }
+
+    
 }
