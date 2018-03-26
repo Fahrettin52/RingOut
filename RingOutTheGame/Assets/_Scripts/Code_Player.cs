@@ -139,7 +139,7 @@ public class Code_Player : MonoBehaviour {
         );
 
         // Rotates the player according to the inputted axis
-        if (move.x != 0 || move.z != 0) {
+        if (move != Vector3.zero) {
             rigidbod.rotation = Quaternion.LookRotation(move * Time.deltaTime);
         }
 
