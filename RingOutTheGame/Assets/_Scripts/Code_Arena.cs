@@ -18,23 +18,26 @@ public class Code_Arena : MonoBehaviour {
     [Header("Arena Parts to Crumble Collectively")]
     public int[] groupsToCrumble;
 
-    private float startPos;
+    private Vector3 startPos;
     private int currentArenaPart;    
     private int currentGroupToCrumble;
     private List<Transform> arenaParts = new List<Transform>();
 
-    private List<Coroutine> crumbleTimers = new List<Coroutine>();
+    private Coroutine crumbleTimer;
     private List<Coroutine> deactivaters = new List<Coroutine>();
     private List<Coroutine> blinkers = new List<Coroutine>();
 
     // Use this for initialization
     void Start () {
         // Safe the arenas y position for later use
-        startPos = transform.position.y;
+        startPos = transform.position;
 
         FillArenaPartsList();
+    }
 
-        StartCoroutine(CrumbleTimer(initialCrumbleTime));
+    // Starts the WHOLE crumble of the arena, acts as if it's the first time
+    public void StartCrumble() {
+        crumbleTimer = StartCoroutine(CrumbleTimer(initialCrumbleTime));
     }
 
     // Fills the arenaParts List
@@ -49,32 +52,21 @@ public class Code_Arena : MonoBehaviour {
         yield return new WaitForSeconds(crumbleTimer);
         CrumbleSelector();
     }
-
-    // Counts down to when the fallen part should be deactivated
-    private IEnumerator DeactivateFallenPart(float deactivationTime, Transform fallenPart) {
-        yield return new WaitForSeconds(deactivationTime);
-        fallenPart.gameObject.SetActive(false);
-    }
     
     // Selects the group that should 
     private void CrumbleSelector() {
         int groupMembers = groupsToCrumble[currentGroupToCrumble];
         for (int i = 0; i < groupMembers ; i++) {
-            StartCoroutine(Blink(wholeBlinkingTime, arenaParts[currentArenaPart]));
+            blinkers.Add(StartCoroutine(Blink(wholeBlinkingTime, arenaParts[currentArenaPart])));
             currentArenaPart++;
         }
 
         // Invokes SelectNextGroupToCrumble after checking if it's not the round in the cycle
         if (currentGroupToCrumble < groupsToCrumble.Length - 1) {
-            Invoke("SelectNextGroupToCrumble", timeBetweenCrumbles);
+            currentGroupToCrumble++;
+            // Call CrumbleTimer to continue the cycle
+            crumbleTimer = StartCoroutine(CrumbleTimer(timeBetweenCrumbles));
         }        
-    }
-
-    // Selects the next group of parts that need to fall down
-    public void SelectNextGroupToCrumble() {
-        currentGroupToCrumble++;
-        // Call CrumbleTimer to continue the cycle
-        StartCoroutine(CrumbleTimer(timeBetweenCrumbles));
     }
 
     // Indicates the parts that are about to crumble 
@@ -92,6 +84,9 @@ public class Code_Arena : MonoBehaviour {
         //Sets the color of the arenaPart back to it's original so that it never crumbles whilst in the blinkingColors value
         arenaRenderer.material.color = arenaPartColor;
 
+        // By removing the first blinker you'll always remove them in line
+        blinkers.RemoveAt(0);
+
         CrumbleProcess(arenaPart);
     }
 
@@ -101,7 +96,7 @@ public class Code_Arena : MonoBehaviour {
         Rigidbody currentPartRigidbody = currentPart.gameObject.GetComponent<Rigidbody>();
 
         // Moving the currentpart under the arena so the convexed collider doesn't glitch into the other parts of the arena
-        while (currentPart.position.y > (startPos - currentPart.localScale.y )) {
+        while (currentPart.position.y > (startPos.y - currentPart.localScale.y )) {
             currentPart.Translate(-Vector3.up * crumbleSpeed * Time.deltaTime);
         }
 
@@ -110,7 +105,16 @@ public class Code_Arena : MonoBehaviour {
         currentPartRigidbody.isKinematic = false;
 
         // Calls the DeactivateFallenPart Coroutine so that after a while the currentPart gets deactivated
-        StartCoroutine(DeactivateFallenPart(timeTillDeactivation, currentPart));
+        deactivaters.Add(StartCoroutine(DeactivateFallenPart(timeTillDeactivation, currentPart)));
+    }
+
+    // Counts down to when the fallen part should be deactivated
+    private IEnumerator DeactivateFallenPart(float deactivationTime, Transform fallenPart) {
+        yield return new WaitForSeconds(deactivationTime);
+        fallenPart.gameObject.SetActive(false);
+
+        // By removing the first deactivator you'll clean the list neatly and correctly
+        deactivaters.RemoveAt(0);
     }
 
     // To check if the player falls off the arena
@@ -121,11 +125,39 @@ public class Code_Arena : MonoBehaviour {
         }
     }
 
+    // Resets the crumbling process of the arena
     public void ResetArena() {
         StopAllCoroutines();
+        // Stop the crumbleTimer Coroutine
+        StopCoroutine(crumbleTimer);
+
+        // Stop all the blinkers Coroutine
+        foreach (Coroutine blinker in blinkers) {
+            StopCoroutine(blinker);
+        }
+
+        // Stop all the blinkers Coroutine
+        foreach (Coroutine deactivater in deactivaters) {
+            StopCoroutine(deactivater);
+        }
+
+        // Reset the position of every arenPart
         foreach (Transform part in arenaParts) {
-            if (part.position != Vector3.zero) {
-                part.position = Vector3.zero;
+            if (part.position != startPos) {
+                // Set their position back to zero, which for now is out default position for the arena
+                part.position = startPos;
+
+                // Create Rigidbody variable from each member
+                Rigidbody prb = part.gameObject.GetComponent<Rigidbody>();
+                prb.useGravity = false;
+                prb.isKinematic = true;
+
+                // Sets all the part ints related to the crumbling process to zero, it's initial value
+                currentGroupToCrumble = 0;
+                currentArenaPart = 0;
+
+                // Reactivate the members
+                part.gameObject.SetActive(true);
             }
         }
     }

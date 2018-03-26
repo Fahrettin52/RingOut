@@ -11,6 +11,7 @@ public class Code_GameManager : MonoBehaviour {
     private List<Vector3> spawnPosition = new List<Vector3>(); // Private list of Vector3 children objects in the items of spawnLocations
     private int playersSelected; // The amount of players selected to play the game
     private int oldPlayersSelected; // Value that saves the playerSelected, so it can compare it later on    
+    public Code_Arena arena; // The arena in the scene
 
     [Header("Ingame Menu")]
     public Code_InGameMenuManager ingameMng; // The Code_IngameManager in the scene
@@ -128,6 +129,9 @@ public class Code_GameManager : MonoBehaviour {
 
         // Allows all players to finally start playing
         AllowMovement();
+
+        // Activate the arena crumble
+        arena.StartCrumble();
     }
 
     // Let the players move
@@ -173,6 +177,9 @@ public class Code_GameManager : MonoBehaviour {
         //foreach (GameObject player in activePlayers) {
         //    player.SetActive(false);
         //}
+
+        // Reset the arenaParts
+        arena.ResetArena();
 
         // Call SpawnPlayers
         SpawnPlayers();

@@ -1204,6 +1204,7 @@ MonoBehaviour:
   - {fileID: 1846398850}
   - {fileID: 24300329}
   - {fileID: 1638837474}
+  arena: {fileID: 237895103}
   ingameMng: {fileID: 589232643}
   playerSelectMenu: {fileID: 1023608223}
   soundMng: {fileID: 1384197451}
@@ -1375,7 +1376,7 @@ MonoBehaviour:
   blinkingTime: 0.25
   blinkingColor: {r: 1, g: 0, b: 0, a: 0}
   initialCrumbleTime: 10
-  timeBetweenCrumbles: 5
+  timeBetweenCrumbles: 10
   crumbleSpeed: 1
   timeTillDeactivation: 10
   groupsToCrumble: 030000000300000002000000
