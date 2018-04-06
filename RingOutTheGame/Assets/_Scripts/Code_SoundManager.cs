@@ -5,12 +5,10 @@ public class Code_SoundManager : MonoBehaviour {
 
     public AudioSource[] musicAudioSource; // Audiosource that controls the music sounds
     public AudioSource[] sFXAudioSource; // Audiosource that controls the sfx sounds
-    public AudioSource[] ambientAudioSource; // Audiosource that controls the ambient sounds
     public AudioSource[] characterAudioSource; // Audiosource that controls the character sounds
 
     public AudioClip[] musicAudioClip; // The music sounds
     public AudioClip[] sFXAudioClip; // The SFX sounds
-    public AudioClip[] ambientAudioClip; // The ambient sounds
     public AudioClip[] characterAudioClip; // The character sounds
 
     public Toggle[] volumeChecks; // An array that contains all the music toggles in the settings menu
@@ -25,23 +23,26 @@ public class Code_SoundManager : MonoBehaviour {
         for (int i = 0; i < sFXAudioSource.Length; i++) {
             sFXAudioSource[i].clip = sFXAudioClip[i];
         }
-        // Store each ambient audioclip in the ambient audiosource
-        for (int i = 0; i < ambientAudioSource.Length; i++) {
-            ambientAudioSource[i].clip = ambientAudioClip[i];
-        }
         // Store each character audioclip in the character audiosource
         for (int i = 0; i < characterAudioSource.Length; i++) {
             characterAudioSource[i].clip = characterAudioClip[i];
         }
         // Call the methode that plays the background music
-        PlayBackgroundMusic();
+        PlayMainMenuMusic();
     }
 
     /// <summary>
     /// Play the mainmenu music
     /// </summary>
-    public void PlayBackgroundMusic() {
+    public void PlayMainMenuMusic() {
         musicAudioSource[0].Play();
+    }
+
+    /// <summary>
+    /// Play the in game ambient music
+    /// </summary>
+    public void PlayGameMusic() {
+        musicAudioSource[1].Play();
     }
 
     /// <summary>
@@ -66,13 +67,6 @@ public class Code_SoundManager : MonoBehaviour {
     }
 
     /// <summary>
-    /// Play the in game ambient music
-    /// </summary>
-    public void PlayAmbientMusic() {
-        ambientAudioSource[0].Play();
-    }
-
-    /// <summary>
     /// Mute or unmute the the chosen audiosource
     /// </summary>
     /// <param name="index"></param>
@@ -83,25 +77,21 @@ public class Code_SoundManager : MonoBehaviour {
                 case 0:
                     // Toggle the music sound
                     foreach (AudioSource item in musicAudioSource) {
-                        item.mute = !item.mute;
+                        if (item != musicAudioSource[1]) {
+                            item.mute = !volumeChecks[1].isOn;
+                        }
                     }
                     break;
                 case 1:
                     // Toggle the sfx sound
                     foreach (AudioSource item in sFXAudioSource) {
-                        item.mute = !item.mute;
+                        item.mute = !volumeChecks[2].isOn;
                     }
                     break;
                 case 2:
-                    // Toggle the ambient sound
-                    foreach (AudioSource item in ambientAudioSource) {
-                        item.mute = !item.mute;
-                    }
-                    break;
-                case 3:
                     // Toggle the character sound
                     foreach (AudioSource item in characterAudioSource) {
-                        item.mute = !item.mute;
+                        item.mute = !volumeChecks[3].isOn;
                     }
                     break;
                 // If non of the above methodes are called break the code
@@ -125,10 +115,6 @@ public class Code_SoundManager : MonoBehaviour {
             for (int i = 0; i < sFXAudioSource.Length; i++) {
                 sFXAudioSource[i].mute = true;
             }
-            // Mute all the ambient sounds
-            for (int i = 0; i < ambientAudioSource.Length; i++) {
-                ambientAudioSource[i].mute = true;
-            }
             // Mute all the character sounds
             for (int i = 0; i < characterAudioSource.Length; i++) {
                 characterAudioSource[i].mute = true;
@@ -138,20 +124,18 @@ public class Code_SoundManager : MonoBehaviour {
         else { 
             // Mute or unmute the music audiosource depending on the current state of the corresponding volumecheck item
             for (int i = 0; i < musicAudioSource.Length; i++) {
-                musicAudioSource[i].mute = !volumeChecks[1].isOn;
+                if (musicAudioSource[i] != musicAudioSource[1]) {
+                    musicAudioSource[i].mute = !volumeChecks[1].isOn;
+                }
             }
             // Mute or unmute the sfx audiosource depending on the current state of the corresponding volumecheck item
             for (int i = 0; i < sFXAudioSource.Length; i++) {
                 sFXAudioSource[i].mute = !volumeChecks[2].isOn;
             }
-            // Mute or unmute the ambient audiosource depending on the current state of the corresponding volumecheck item
-            for (int i = 0; i < ambientAudioSource.Length; i++) {
-                ambientAudioSource[i].mute = !volumeChecks[3].isOn;
-            }
             // Mute or unmute the character audiosource depending on the current state of the corresponding volumecheck item
             for (int i = 0; i < characterAudioSource.Length; i++) {
-                characterAudioSource[i].mute = !volumeChecks[4].isOn;
+                characterAudioSource[i].mute = !volumeChecks[3].isOn;
             }
         }
-    }
+    }`
 }

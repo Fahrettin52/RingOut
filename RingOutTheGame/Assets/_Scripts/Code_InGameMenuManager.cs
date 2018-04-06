@@ -90,23 +90,25 @@ public class Code_InGameMenuManager : Code_MenuManager {
     /// Pause the game
     /// </summary>
     public override void Pause() {
-        // Pause the game
+        // Unpause the game
         if (Time.timeScale == 0) {
             Time.timeScale = 1;
-            // Turn off the sounds
-            soundMng.TurnOffSelectedSound(2);
-            soundMng.TurnOffSelectedSound(0);
             // Play the ambient music
-            soundMng.PlayAmbientMusic();
+            if (soundMng.volumeChecks[0].isOn && soundMng.volumeChecks[1].isOn) {
+                soundMng.musicAudioSource[0].mute = !soundMng.musicAudioSource[0].mute;
+                soundMng.musicAudioSource[1].mute = !soundMng.musicAudioSource[1].mute;
+                soundMng.PlayGameMusic();
+            }
         }
-        // Unpause the game
+        // Pause the game
         else {
             Time.timeScale = 0;
-            // Turn off the sounds
-            soundMng.TurnOffSelectedSound(2);
-            soundMng.TurnOffSelectedSound(0);
             // Play the mainmenu music
-            soundMng.PlayBackgroundMusic();
+            if (soundMng.volumeChecks[0].isOn && soundMng.volumeChecks[1].isOn) {
+                soundMng.musicAudioSource[0].mute = !soundMng.musicAudioSource[0].mute;
+                soundMng.musicAudioSource[1].mute = !soundMng.musicAudioSource[1].mute;
+                soundMng.PlayMainMenuMusic();
+            }
         }
     }
 }

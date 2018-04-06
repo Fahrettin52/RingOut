@@ -63,9 +63,11 @@ public class Code_GameManager : MonoBehaviour {
         // Determines how many players are being activated
         FillActivePlayerList();
 
-        // Changes the background music
-        soundMng.TurnOffSelectedSound(0);
-        soundMng.PlayAmbientMusic();
+        // Turn off the Main Menu Music sound
+        soundMng.musicAudioSource[0].mute = !soundMng.musicAudioSource[0].mute;
+
+        // Play the Game Music sound
+        soundMng.PlayGameMusic();
 
         // Spawns the players to their respective spawnPoint
         SpawnPlayers();
