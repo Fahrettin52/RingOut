@@ -9,7 +9,7 @@ public class Code_Player : MonoBehaviour {
         Death,
         Normal,
         Knockedback,
-        Attacking,       
+        Attacking,
         Victory
     }
     public MoveState moveState;
@@ -48,7 +48,7 @@ public class Code_Player : MonoBehaviour {
 
     // Use this for initialization
     private void Start() {
-        SetStartVariables();      
+        SetStartVariables();
     }
 
     // Update is called once per frame
@@ -108,8 +108,10 @@ public class Code_Player : MonoBehaviour {
         );
 
         // Rotates the player according to the inputted axis
-        if (move.x != 0 || move.z != 0) {
-            rigidbod.rotation = Quaternion.LookRotation(move * Time.deltaTime);
+        if (!Input.GetButton("Strafe" + playerNumberString)) {
+            if (move.x != 0 || move.z != 0) {
+                rigidbod.rotation = Quaternion.LookRotation(move * Time.deltaTime);
+            }
         }
 
         // Moves the player according to the inputted axis
