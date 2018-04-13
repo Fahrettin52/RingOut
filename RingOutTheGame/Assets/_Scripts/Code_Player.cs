@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Code_Player : MonoBehaviour {
 
@@ -23,10 +24,11 @@ public class Code_Player : MonoBehaviour {
     private string playerNumberString;
     public float groundRayCastLength;
     [Header("Stamina Related")]
-    public int stamina;
+    public Image staminaBar; // Stamina bar image of the player
+    public float stamina;
     public int attackCost; // Determines how much stamina is consumed after attacking
-    private int startStamina;
-    public int staminaRegenAmount; // With how much the stamina regenerates per rate
+    private float startStamina;
+    public float staminaRegenAmount; // With how much the stamina regenerates per rate
     public float staminaRegenRate; // The rate per tick that stamina regenerates
 
     [Header("Knockback")]
@@ -127,6 +129,7 @@ public class Code_Player : MonoBehaviour {
                 SwitchMoveState(MoveState.Attacking);
                 shieldCode.Attack();
                 stamina -= attackCost;
+                UpdateStaminaBar();
             }
         }
     }
@@ -226,7 +229,13 @@ public class Code_Player : MonoBehaviour {
         if (Time.time > staminaRegen) {
             stamina += staminaRegenAmount;
             staminaRegen = Time.time + staminaRegenRate;
+            UpdateStaminaBar();
         }
+    }
+
+    // Updates the staminabar UI
+    public void UpdateStaminaBar() {
+        staminaBar.fillAmount = stamina / 100;
     }
 
     // Sets any variable that needs to be set during Start()
