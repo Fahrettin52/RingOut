@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class Code_InGameMenuManager : Code_MenuManager {
 
+    public Code_GameManager gameMng; // The game manager in the scene
     public Code_SoundManager soundMng; // The Code_SoundManager
 
     public bool allowStart; // Boolean to check if you may pause he game
@@ -101,13 +102,16 @@ public class Code_InGameMenuManager : Code_MenuManager {
             }
         }
         // Pause the game
-        else {
+        else {            
             Time.timeScale = 0;
+            allowStart = false;
+            gameMng.DisableMovement();
+
             // Play the mainmenu music
             if (soundMng.volumeChecks[0].isOn && soundMng.volumeChecks[1].isOn) {
                 soundMng.musicAudioSource[0].mute = !soundMng.musicAudioSource[0].mute;
                 soundMng.musicAudioSource[1].mute = !soundMng.musicAudioSource[1].mute;
-                soundMng.PlayMainMenuMusic();
+                soundMng.PlayMainMenuMusic();                        
             }
         }
     }

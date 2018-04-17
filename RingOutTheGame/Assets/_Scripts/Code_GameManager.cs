@@ -11,6 +11,7 @@ public class Code_GameManager : MonoBehaviour {
     private List<Vector3> spawnPosition = new List<Vector3>(); // Private list of Vector3 children objects in the items of spawnLocations
     private int playersSelected; // The amount of players selected to play the game
     private int oldPlayersSelected; // Value that saves the playerSelected, so it can compare it later on    
+    private bool firstTimeStarting; // Differentiates the code when it's the first time calling StartGameCountdown Function
 
     [Header("Arena")]
     public Code_Arena arena; // The arena in the scene
@@ -111,6 +112,10 @@ public class Code_GameManager : MonoBehaviour {
         // Toggle pause
         TogglePause();
 
+        CallStartGameCountdown();
+    }
+
+    public void CallStartGameCountdown() {
         // Starts the countdown of the game
         StartCoroutine(StartGameCountdown());
     }
@@ -129,22 +134,43 @@ public class Code_GameManager : MonoBehaviour {
 
         // Resets the necessary variables for later reuse
         countdownBanner.SetActive(false);
-        countdownSeconds = countdownSecondsSaved;
+        countdownSeconds = countdownSecondsSaved;        
+
+        // Check if this is the first time that this function's called
+        if (!firstTimeStarting) {
+            // Allows all players to finally start playing
+            AllowMovement();
+
+            // Activate the arena crumble
+            arena.StartCrumble();
+            firstTimeStarting = true;
+        }
+        else {            
+            ResetMovement();
+        }
 
         // Activates the IngameMenuManager
         ingameMng.allowStart = true;
-
-        // Allows all players to finally start playing
-        AllowMovement();
-
-        // Activate the arena crumble
-        arena.StartCrumble();
     }
 
     // Let the players move
     private void AllowMovement() {
         foreach (GameObject player in activePlayers) {
             player.GetComponent<Code_Player>().NormalizeMoveState();
+        }
+    }
+
+    // Resets the movestate back to its previous state
+    private void ResetMovement() {
+        foreach (GameObject player in activePlayers) {
+            player.GetComponent<Code_Player>().NormalizeMoveState();
+        }
+    }
+
+    // Players are not allowed to move
+    public void DisableMovement() {
+        foreach (GameObject player in activePlayers) {
+            player.GetComponent<Code_Player>().PauseMoveState();
         }
     }
 
@@ -188,6 +214,14 @@ public class Code_GameManager : MonoBehaviour {
         newArena = Instantiate(arenaPrefab, Vector3.zero, Quaternion.identity);
         newArena.name = arenaName;
         arena = newArena.GetComponent<Code_Arena>();
+
+        // Reset firstTimeStarting
+        firstTimeStarting = false;
+
+        // Reset player stamina if necesarry
+        foreach (GameObject player in activePlayers) {
+            player.GetComponent<Code_Player>().ResetStamina();
+        }
 
         // Call SpawnPlayers
         SpawnPlayers();

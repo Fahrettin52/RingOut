@@ -11,9 +11,11 @@ public class Code_Player : MonoBehaviour {
         Normal,
         Knockedback,
         Attacking,
-        Victory
+        Victory,
+        Paused
     }
     public MoveState moveState;
+    private MoveState previousMoveState;
 
     public GameObject shield; // The PCs connectec shield
     private Code_Shield shieldCode; // the Code_Shield component on the shield child
@@ -219,6 +221,16 @@ public class Code_Player : MonoBehaviour {
         SwitchMoveState(MoveState.Normal);
     }
 
+    public void ResetMoveState() {
+        SwitchMoveState(previousMoveState);
+    }
+
+    // Makes sure that the players can't move
+    public void PauseMoveState() {
+        previousMoveState = moveState;
+        SwitchMoveState(MoveState.Paused);
+    }
+
     // Is called from the Code_GameManager in the scene whenever this object is declared the victor
     public void VictoryDance() {
         SwitchMoveState(MoveState.Victory);
@@ -231,6 +243,12 @@ public class Code_Player : MonoBehaviour {
             staminaRegen = Time.time + staminaRegenRate;
             UpdateStaminaBar();
         }
+    }
+
+    // Fully regenerates the stamina
+    public void ResetStamina() {
+        stamina = startStamina;
+        UpdateStaminaBar();
     }
 
     // Updates the staminabar UI
