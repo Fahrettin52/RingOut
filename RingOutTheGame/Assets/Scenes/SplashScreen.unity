@@ -295,7 +295,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 554, y: 416}
+  m_SizeDelta: {x: 831, y: 624}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &175730560
 MonoBehaviour:
@@ -576,7 +576,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.58823526, g: 0.1686851, b: 0.1686851, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -625,7 +625,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   logo: {fileID: 175730560}
-  sceneIndex: 1
 --- !u!4 &1997043984
 Transform:
   m_ObjectHideFlags: 0
