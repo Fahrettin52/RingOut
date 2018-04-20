@@ -46,7 +46,7 @@ public class Code_GameManager : MonoBehaviour {
     }
 
     // Centralization of turning pause on and off
-    private void TogglePause() {
+    public void TogglePause() {
         if (Time.timeScale == 1) {
             Time.timeScale = 0;
         }

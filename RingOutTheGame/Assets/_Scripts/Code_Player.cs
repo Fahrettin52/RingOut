@@ -40,6 +40,10 @@ public class Code_Player : MonoBehaviour {
     public float knockbackTime; // How long the knockback effect lasts
     private float staminaRegen;
 
+    [Header("Raycasts")]
+    public LayerMask groundLayer;
+    public Transform[] rcPos; // Positions of the raycasts
+
     [Header("Based on players remaining stamina")]
     public int[] knockbackDangerLevels; // The dangerlevels of having low stamina. A lower amount means a higher knockbackMultiplier
     [Header("Based on the array above (Has to be same size)")]
@@ -56,7 +60,7 @@ public class Code_Player : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update() {
+    void Update() {        
         switch (moveState) {
             case MoveState.Normal:
                 if (!keyboardControlled) {
@@ -83,23 +87,37 @@ public class Code_Player : MonoBehaviour {
         if (stamina < startStamina) {
             StaminaRegen();
         }
-    }
+    }    
 
     // TODO Split the current player movement into two parts, player Input in the Üpdate and Physics calculations in the FixedUpdate
-    void FixedUpdate() {
+    void FixedUpdate() {        
         switch (moveState) {
             case MoveState.Normal:
-                if (!keyboardControlled) {
-                    Movement();
-                }
-                else {
-                    MovementKeyboard(); // TODO remove this after testing phase
+                if (GroundChecks()) {
+                    if (!keyboardControlled) {
+                        Movement();
+                    }
+                    else {
+                        MovementKeyboard(); // TODO remove this after testing phase
+                    }
                 }
                 break;
             case MoveState.Knockedback:
                 Knockback();
                 break;
         }
+    }
+
+    private bool GroundChecks() {
+        Vector3 downward = transform.TransformDirection(Vector3.down);
+        bool isGrounded = false;
+        for (int i = 0;  i < rcPos.Length; i++) {
+            isGrounded = Physics.Raycast(rcPos[i].position, downward, 10f, groundLayer);
+            if (isGrounded) {
+                break;             
+            }
+        }
+        return isGrounded;
     }
 
     //Replace this with the content in KeyboardMovement()
@@ -140,9 +158,9 @@ public class Code_Player : MonoBehaviour {
     private void MovementKeyboard() {
         // Save the inputted axis in a Vector3
         Vector3 move = new Vector3(
-            Input.GetAxis("HorizontalKeyboard") * movementSpeed,
+            Input.GetAxis("HorizontalKeyboard" + playerNumber) * movementSpeed,
             0,
-            Input.GetAxis("VerticalKeyboard") * movementSpeed
+            Input.GetAxis("VerticalKeyboard" + playerNumber) * movementSpeed
         );
 
         // Rotates the player according to the inputted axis
@@ -157,7 +175,7 @@ public class Code_Player : MonoBehaviour {
 
     // TODO remove this function after testing
     public void AttackKeyboard() {
-        if (Input.GetButtonDown("Jump")) {
+        if (Input.GetButtonDown("Jump" + playerNumber)) {
             // Making sure that stamina never gets below 0
             if (stamina - attackCost >= 0) {
                 SwitchMoveState(MoveState.Attacking);
@@ -173,7 +191,6 @@ public class Code_Player : MonoBehaviour {
         knockbackDir = hitPosition - transform.position;
         knockbackDir.y = 0;
         knockbackDir.Normalize();
-        print("knockback Dir = " + knockbackDir);
         
         // Disallow movement
         SwitchMoveState(MoveState.Knockedback);
