@@ -109,6 +109,12 @@ public class Code_MenuManager : MonoBehaviour {
                 // Select the button that activates the playerselectmenu
                 PickFirstButton(playerSelectMenuButtons, !playerSelectMenu.activeSelf, number);
                 break;
+            case 5:
+                // Toggle the confirmquitmenu
+                confirmQuit.SetActive(!confirmQuit.activeSelf);
+                // Select the button that activates the confirmquitmenu
+                PickFirstButton(confirmQuitButtons, !confirmQuit.activeSelf, number);
+                break;
             // If non of the above methodes are called break the code
             default:
                 break;
