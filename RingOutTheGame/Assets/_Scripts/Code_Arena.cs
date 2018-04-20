@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Code_Arena : MonoBehaviour {
     public GameObject gameMng; // The GameMng GameObject in the scene
+    public BouncerControl bouncer;
 
     [Header("Blinking Process")]
     public float wholeBlinkingTime;
@@ -43,6 +44,7 @@ public class Code_Arena : MonoBehaviour {
 
     // Starts the WHOLE crumble of the arena, acts as if it's the first time
     public void StartCrumble() {
+        StartBouncer();
         StartCoroutine(CrumbleTimer(initialCrumbleTime));
     }   
 
@@ -65,7 +67,7 @@ public class Code_Arena : MonoBehaviour {
             currentGroupToCrumble++;
             // Call CrumbleTimer to continue the cycle
             StartCoroutine(CrumbleTimer(timeBetweenCrumbles));
-        }        
+        }
     }
 
     // Indicates the parts that are about to crumble 
@@ -116,5 +118,17 @@ public class Code_Arena : MonoBehaviour {
             col.GetComponent<Code_Player>().Die();
             gameMng.GetComponent<Code_GameManager>().CheckForVictory(col.transform.gameObject);
         }
+    }
+
+    // Chec
+    public void StartBouncer() {
+        int random = Random.Range(0, 2);
+        if (random > 0) {
+            bouncer.Teleport();
+        }
+    }
+
+    public void StopBouncer() {
+        bouncer.StopTeleport();
     }
 }

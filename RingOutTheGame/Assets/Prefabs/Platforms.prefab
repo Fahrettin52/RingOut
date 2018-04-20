@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23531505148593324}
   - component: {fileID: 64581012700980884}
   - component: {fileID: 54320114258892978}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: InnerCircle (1)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 23136784621352142}
   - component: {fileID: 64996902799374348}
   - component: {fileID: 54577595194912056}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: OuterCircle (4)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 23206870423380302}
   - component: {fileID: 64627367057031926}
   - component: {fileID: 54037328577968168}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: InnerCircle (0)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -80,7 +80,7 @@ GameObject:
   - component: {fileID: 23739593791669934}
   - component: {fileID: 64956670760794910}
   - component: {fileID: 54829724656251342}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: OuterCircle (3)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 23639048224359266}
   - component: {fileID: 64918591882340920}
   - component: {fileID: 54789886516941184}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: OuterCircle (0)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 23417874470553696}
   - component: {fileID: 64058302599347096}
   - component: {fileID: 54149973650812552}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: OuterCircle (5)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 23524331993626452}
   - component: {fileID: 64029872561689288}
   - component: {fileID: 54035119296840888}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: InnerCircle (3)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -174,7 +174,7 @@ GameObject:
   - component: {fileID: 23420675911190062}
   - component: {fileID: 64381663854733258}
   - component: {fileID: 54661418611396788}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CenterHalf (1)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 23694634000638266}
   - component: {fileID: 64082236333966476}
   - component: {fileID: 54187969291760856}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: OuterCircle (2)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: 23026552528326146}
   - component: {fileID: 64274648825376636}
   - component: {fileID: 54865957781376720}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CenterHalf (0)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -231,7 +231,7 @@ GameObject:
   - component: {fileID: 23390700508150870}
   - component: {fileID: 64130183244511418}
   - component: {fileID: 54715354600971468}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: OuterCircle (1)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -250,7 +250,7 @@ GameObject:
   - component: {fileID: 23189343709953132}
   - component: {fileID: 64949627649100044}
   - component: {fileID: 54009169063346862}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: InnerCircle (2)
   m_TagString: Ground
   m_Icon: {fileID: 0}

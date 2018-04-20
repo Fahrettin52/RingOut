@@ -189,15 +189,35 @@ public class Code_GameManager : MonoBehaviour {
             ingameMng.allowStart = false;
             activePlayers[0].GetComponent<Code_Player>().VictoryDance();
             AnnounceWinner(activePlayers[0].GetComponent<Code_Player>());
+            arena.StopBouncer();
             StartCoroutine(RestartFromVictory());
         }
     }
 
     // Stops the gameplay and announces the winner through the VictoryBanner GameObject
     private void AnnounceWinner(Code_Player winner) {
-        //Time.timeScale = 0; // TODO Check for a better location for this snipet of code
-        victoryBanner.SetActive(true);
-        victoryMessageText.text = victoryMessage + winner.playerNumber;
+        victoryMessageText.text = victoryMessage + GetVictorsColor(winner.playerNumber);
+        victoryBanner.SetActive(true);        
+    }
+
+    // Gives back a string based on the number of the winning player
+    private string GetVictorsColor(int winningNumber) {
+        switch (winningNumber) {
+            case 1:
+                victoryMessageText.color = Color.blue;
+                return "blue wins";
+            case 2:
+                victoryMessageText.color = Color.green;
+                return "green wins";
+            case 3:
+                victoryMessageText.color = Color.red;
+                return "red wins";
+            case 4:
+                victoryMessageText.color = Color.yellow;
+                return "yellow wins";
+            default:
+                return "Winners don't use drugs";
+        }
     }
 
     // Automatically restarts the game after a victory has been declared
