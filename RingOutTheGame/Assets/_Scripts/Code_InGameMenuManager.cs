@@ -93,7 +93,7 @@ public class Code_InGameMenuManager : Code_MenuManager {
     public override void Pause() {
         // Unpause the game
         if (Time.timeScale == 0) {
-            Time.timeScale = 1;
+            //Time.timeScale = 1;
             // Play the ambient music
             if (soundMng.volumeChecks[0].isOn && soundMng.volumeChecks[1].isOn) {
                 soundMng.musicAudioSource[0].mute = !soundMng.musicAudioSource[0].mute;
@@ -105,7 +105,6 @@ public class Code_InGameMenuManager : Code_MenuManager {
         else {            
             Time.timeScale = 0;
             allowStart = false;
-            gameMng.DisableMovement();
 
             // Play the mainmenu music
             if (soundMng.volumeChecks[0].isOn && soundMng.volumeChecks[1].isOn) {

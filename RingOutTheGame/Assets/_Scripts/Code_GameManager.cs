@@ -40,7 +40,9 @@ public class Code_GameManager : MonoBehaviour {
     public string victoryMessage; // Message that precedes the victors name
 
     void Start() {
-        TogglePause();
+        if (Time.timeScale == 1) {
+            Time.timeScale = 0;
+        }
     }
 
     // Centralization of turning pause on and off
@@ -109,9 +111,6 @@ public class Code_GameManager : MonoBehaviour {
             player.SetActive(true);
         }
 
-        // Toggle pause
-        TogglePause();
-
         CallStartGameCountdown();
     }
 
@@ -127,14 +126,21 @@ public class Code_GameManager : MonoBehaviour {
         
         // A countdown system using the while loop
         while (countdownSeconds != 0) {
-            countdownText.text = countdownSeconds.ToString();            
+            countdownText.text = countdownSeconds.ToString();
             countdownSeconds--;
-            yield return new WaitForSeconds(1f);
+            float countdownEnd = Time.realtimeSinceStartup + 1f; // The 1f represents one second, MUST be hardcoded
+            while (Time.realtimeSinceStartup < countdownEnd) {
+                yield return null;
+            }            
         }
 
         // Resets the necessary variables for later reuse
         countdownBanner.SetActive(false);
-        countdownSeconds = countdownSecondsSaved;        
+        countdownSeconds = countdownSecondsSaved;
+
+        // Toggle pause
+        TogglePause();
+        
 
         // Check if this is the first time that this function's called
         if (!firstTimeStarting) {
