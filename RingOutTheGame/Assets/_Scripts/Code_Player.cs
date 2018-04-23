@@ -60,7 +60,15 @@ public class Code_Player : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update() {        
+    void Update() {
+        if (Time.timeScale != 0) {
+            CheckMoveState();
+            CheckStamina();
+        }
+    }
+
+    // Checks the movestate of the player
+    private void CheckMoveState() {
         switch (moveState) {
             case MoveState.Normal:
                 if (!keyboardControlled) {
@@ -83,11 +91,14 @@ public class Code_Player : MonoBehaviour {
                 // TODO play victory animation here, or something like that
                 break;
         }
+    }
 
+    // Checks the players stamina incase it has to regenerate
+    private void CheckStamina() {
         if (stamina < startStamina) {
             StaminaRegen();
         }
-    }    
+    }
 
     // TODO Split the current player movement into two parts, player Input in the Üpdate and Physics calculations in the FixedUpdate
     void FixedUpdate() {        
@@ -108,6 +119,7 @@ public class Code_Player : MonoBehaviour {
         }
     }
 
+    // Checks if the player is touching ground
     private bool GroundChecks() {
         Vector3 downward = transform.TransformDirection(Vector3.down);
         bool isGrounded = false;
@@ -145,7 +157,7 @@ public class Code_Player : MonoBehaviour {
     public void Attack() {
         if (Input.GetButtonDown("AButton" + playerNumberString)) {
             // Making sure that stamina never gets below 0
-            if (stamina - attackCost >= 0) {
+            if (stamina - attackCost >= 0) {                
                 SwitchMoveState(MoveState.Attacking);
                 shieldCode.Attack();
                 stamina -= attackCost;
@@ -178,6 +190,7 @@ public class Code_Player : MonoBehaviour {
         if (Input.GetButtonDown("Jump" + playerNumber)) {
             // Making sure that stamina never gets below 0
             if (stamina - attackCost >= 0) {
+                print("Game is paused, shouldn't be attacking anything!");
                 SwitchMoveState(MoveState.Attacking);
                 shieldCode.Attack();
                 stamina -= attackCost;
