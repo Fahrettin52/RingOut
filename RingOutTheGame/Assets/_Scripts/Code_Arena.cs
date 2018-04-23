@@ -120,15 +120,12 @@ public class Code_Arena : MonoBehaviour {
         }
     }
 
-    // Chec
+    // Activates the bouncer
     public void StartBouncer() {
+        // First has a check to determine if the bouncer should be activated this round
         int random = Random.Range(0, 2);
         if (random > 0) {
-            bouncer.Teleport();
+            bouncer.StartMoveBouncer();
         }
-    }
-
-    public void StopBouncer() {
-        bouncer.StopTeleport();
     }
 }

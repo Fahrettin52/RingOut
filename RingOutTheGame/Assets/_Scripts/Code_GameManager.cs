@@ -192,7 +192,7 @@ public class Code_GameManager : MonoBehaviour {
             ingameMng.allowStart = false;
             activePlayers[0].GetComponent<Code_Player>().VictoryDance();
             AnnounceWinner(activePlayers[0].GetComponent<Code_Player>());
-            arena.StopBouncer();
+            bouncer.StopCurrentCoroutine();
             StartCoroutine(RestartFromVictory());
         }
     }
@@ -244,8 +244,10 @@ public class Code_GameManager : MonoBehaviour {
         newArena.name = arenaName;
         arena = newArena.GetComponent<Code_Arena>();
 
-        // Assign new bouncer to the arena
+        // Assign a new bouncer to the arena
         arena.bouncer = bouncer;
+        // Reset the bouncers position
+        bouncer.ResetPosition();
 
         // Reset firstTimeStarting
         firstTimeStarting = false;

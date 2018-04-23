@@ -2459,12 +2459,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2c71b5bae5da734f9571d33a1417ad4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teleportSpot:
+  moveSpots:
   - {fileID: 1120291603}
   - {fileID: 1434118424}
   - {fileID: 1338608896}
   - {fileID: 2045465629}
-  teleportTimer: 5
+  moveCooldownTimer: 5
+  speed: 3
+  minDist: 1
 --- !u!1 &644344650
 GameObject:
   m_ObjectHideFlags: 0
