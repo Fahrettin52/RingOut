@@ -18,6 +18,7 @@ public class Code_Arena : MonoBehaviour {
     public float timeTillDeactivation;
     [Header("Arena Parts to Crumble Collectively")]
     public int[] groupsToCrumble;
+    private int groupsToBeSpared; // Determines from which groups in the array shouldn't crumble
 
     private Vector3 startPos;
     private int currentArenaPart;    
@@ -31,6 +32,11 @@ public class Code_Arena : MonoBehaviour {
 
         // Selects the gameMng
         gameMng = GameObject.FindGameObjectWithTag("GameMng");
+
+        // Check and Set the groupsToBeSpared if it's 0
+        if (groupsToBeSpared == 0) {
+            groupsToBeSpared = 1;
+        }
 
         FillArenaPartsList();
     }
@@ -63,7 +69,7 @@ public class Code_Arena : MonoBehaviour {
         }
 
         // Invokes SelectNextGroupToCrumble after checking if it's not the round in the cycle
-        if (currentGroupToCrumble < groupsToCrumble.Length - 1) {
+        if (currentGroupToCrumble < groupsToCrumble.Length - groupsToBeSpared) {
             currentGroupToCrumble++;
             // Call CrumbleTimer to continue the cycle
             StartCoroutine(CrumbleTimer(timeBetweenCrumbles));
@@ -126,6 +132,9 @@ public class Code_Arena : MonoBehaviour {
         int random = Random.Range(0, 2);
         if (random > 0) {
             bouncer.StartMoveBouncer();
+        }
+        else {
+            groupsToBeSpared++; // Increments the groupsTobeSpared to that the centerhalves do not fall
         }
     }
 }
