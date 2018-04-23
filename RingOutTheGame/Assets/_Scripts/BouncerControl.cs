@@ -20,6 +20,8 @@ public class BouncerControl : MonoBehaviour {
     }
 
     public void StopTeleport() {
-        StopCoroutine(teleportRoutine);
+        if (teleportRoutine != null) {
+            StopCoroutine(teleportRoutine);
+        }
     }
 }

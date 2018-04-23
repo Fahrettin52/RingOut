@@ -19,6 +19,9 @@ public class Code_GameManager : MonoBehaviour {
     public string arenaName; // To name the newly instantiated arena
     private GameObject newArena; // To save the instantiated arena
 
+    [Header("Bouncer")]
+    public BouncerControl bouncer; // The bouncer object present in the scene
+
     [Header("Ingame Menu")]
     public Code_InGameMenuManager ingameMng; // The Code_IngameManager in the scene
 
@@ -240,6 +243,9 @@ public class Code_GameManager : MonoBehaviour {
         newArena = Instantiate(arenaPrefab, Vector3.zero, Quaternion.identity);
         newArena.name = arenaName;
         arena = newArena.GetComponent<Code_Arena>();
+
+        // Assign new bouncer to the arena
+        arena.bouncer = bouncer;
 
         // Reset firstTimeStarting
         firstTimeStarting = false;
