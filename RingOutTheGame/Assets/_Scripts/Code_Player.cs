@@ -126,7 +126,7 @@ public class Code_Player : MonoBehaviour {
 
     // Handles the Teleportation
     public void CheckTeleport() {
-        if (!didTP && Input.GetButtonDown("YButton" + playerNumberString)) {
+        if (!didTP && Input.GetButton("YButton" + playerNumberString)) {
             didTP = true;
             int random = Random.Range(0, 4);
             transform.position = tpList[random].position;
