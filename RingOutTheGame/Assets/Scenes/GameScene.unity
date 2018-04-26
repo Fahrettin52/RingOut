@@ -1655,6 +1655,12 @@ Prefab:
       propertyPath: knockbackMultiplierList.Array.data[1]
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 114559492071315086, guid: de9a67168feb5114aba4a73e16e6fbda,
+        type: 2}
+      propertyPath: teleportImage
+      value: 
+      objectReference: {fileID: 21300000, guid: 7d6c0c70fe76e024bacfbef8faf5426e,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: de9a67168feb5114aba4a73e16e6fbda, type: 2}
   m_IsPrefabParent: 0
@@ -5077,6 +5083,12 @@ Prefab:
       propertyPath: knockbackDangerLevels.Array.data[0]
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 114559492071315086, guid: de9a67168feb5114aba4a73e16e6fbda,
+        type: 2}
+      propertyPath: teleportImage
+      value: 
+      objectReference: {fileID: 21300000, guid: 7d6c0c70fe76e024bacfbef8faf5426e,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: de9a67168feb5114aba4a73e16e6fbda, type: 2}
   m_IsPrefabParent: 0
@@ -5683,6 +5695,12 @@ Prefab:
       propertyPath: knockbackDangerLevels.Array.data[0]
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 114559492071315086, guid: de9a67168feb5114aba4a73e16e6fbda,
+        type: 2}
+      propertyPath: teleportImage
+      value: 
+      objectReference: {fileID: 21300000, guid: 7d6c0c70fe76e024bacfbef8faf5426e,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: de9a67168feb5114aba4a73e16e6fbda, type: 2}
   m_IsPrefabParent: 0
@@ -6265,11 +6283,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114585679216125434, guid: de9a67168feb5114aba4a73e16e6fbda,
-        type: 2}
-      propertyPath: sceneCamera
-      value: 
-      objectReference: {fileID: 94439900}
     - target: {fileID: 114559492071315086, guid: de9a67168feb5114aba4a73e16e6fbda,
         type: 2}
       propertyPath: tpList.Array.data[0]
@@ -6290,49 +6303,14 @@ Prefab:
       propertyPath: tpList.Array.data[3]
       value: 
       objectReference: {fileID: 106127362}
+    - target: {fileID: 114585679216125434, guid: de9a67168feb5114aba4a73e16e6fbda,
+        type: 2}
+      propertyPath: sceneCamera
+      value: 
+      objectReference: {fileID: 94439900}
     - target: {fileID: 1936532488741708, guid: de9a67168feb5114aba4a73e16e6fbda, type: 2}
       propertyPath: m_Name
       value: PlayerController (0)
-      objectReference: {fileID: 0}
-    - target: {fileID: 114559492071315086, guid: de9a67168feb5114aba4a73e16e6fbda,
-        type: 2}
-      propertyPath: knockbackDangerLevels.Array.data[3]
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 114559492071315086, guid: de9a67168feb5114aba4a73e16e6fbda,
-        type: 2}
-      propertyPath: knockbackDangerLevels.Array.data[2]
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 114559492071315086, guid: de9a67168feb5114aba4a73e16e6fbda,
-        type: 2}
-      propertyPath: knockbackDangerLevels.Array.data[1]
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 114559492071315086, guid: de9a67168feb5114aba4a73e16e6fbda,
-        type: 2}
-      propertyPath: knockbackDangerLevels.Array.data[0]
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 114559492071315086, guid: de9a67168feb5114aba4a73e16e6fbda,
-        type: 2}
-      propertyPath: knockbackMultiplierList.Array.data[0]
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 114559492071315086, guid: de9a67168feb5114aba4a73e16e6fbda,
-        type: 2}
-      propertyPath: knockbackMultiplierList.Array.data[3]
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114559492071315086, guid: de9a67168feb5114aba4a73e16e6fbda,
-        type: 2}
-      propertyPath: knockbackMultiplierList.Array.data[2]
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 114559492071315086, guid: de9a67168feb5114aba4a73e16e6fbda,
-        type: 2}
-      propertyPath: knockbackMultiplierList.Array.data[1]
-      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: de9a67168feb5114aba4a73e16e6fbda, type: 2}

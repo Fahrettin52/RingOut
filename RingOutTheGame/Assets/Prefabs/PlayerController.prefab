@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 222196388506105944}
   - component: {fileID: 114578945704683920}
   m_Layer: 0
-  m_Name: EnergyIcon
+  m_Name: TeleportIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -623,6 +623,8 @@ MonoBehaviour:
   attackCost: 15
   staminaRegenAmount: 5
   staminaRegenRate: 1
+  teleportImage: {fileID: 21300000, guid: 7d6c0c70fe76e024bacfbef8faf5426e, type: 3}
+  teleportIcon: {fileID: 114578945704683920}
   knockbackSpeed: 10
   knockbackTime: 0.5
   didTP: 0
@@ -639,12 +641,12 @@ MonoBehaviour:
   - {fileID: 4950784840832396}
   - {fileID: 4228450708627968}
   - {fileID: 4637569311435722}
-  knockbackDangerLevels: 0a00000019000000320000004b000000
+  knockbackDangerLevels: 14000000280000003c00000050000000
   knockbackMultiplierList:
-  - 16
-  - 12
-  - 8
-  - 6
+  - 20
+  - 15
+  - 10
+  - 5
 --- !u!114 &114578945704683920
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -664,7 +666,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 2182d37d43ad27e45abb4caf0477e285, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 74ee0d5890fd03f41829a75b51262bd1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

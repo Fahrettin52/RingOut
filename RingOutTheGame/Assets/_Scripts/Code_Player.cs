@@ -32,6 +32,8 @@ public class Code_Player : MonoBehaviour {
     private float startStamina;
     public float staminaRegenAmount; // With how much the stamina regenerates per rate
     public float staminaRegenRate; // The rate per tick that stamina regenerates
+    public Sprite teleportImage; // This hold the image that is gonna change
+    public Image teleportIcon; // The icon that tells you if you can teleport
 
     [Header("Knockback")]
     public int knockbackSpeed; // How fast (by proxy how far) the PC will move when knockedback
@@ -130,6 +132,7 @@ public class Code_Player : MonoBehaviour {
             didTP = true;
             int random = Random.Range(0, 4);
             transform.position = tpList[random].position;
+            teleportIcon.sprite = teleportImage;
         }
     }
 
