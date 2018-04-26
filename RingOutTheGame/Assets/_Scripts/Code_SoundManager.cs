@@ -42,7 +42,9 @@ public class Code_SoundManager : MonoBehaviour {
     /// Play the in game ambient music
     /// </summary>
     public void PlayGameMusic() {
-        musicAudioSource[1].Play();
+        if (volumeChecks[1].isOn) {
+            musicAudioSource[1].Play();
+        }
     }
 
     /// <summary>
@@ -70,7 +72,7 @@ public class Code_SoundManager : MonoBehaviour {
     /// Mute or unmute the the chosen audiosource
     /// </summary>
     /// <param name="index"></param>
-    public void TurnOffSelectedSound(int index) {
+    public void ToggleSelectedSound(int index) {
         // Check if the mastervolumes boolean is true 
         if (volumeChecks[0].isOn) {
             switch (index) {

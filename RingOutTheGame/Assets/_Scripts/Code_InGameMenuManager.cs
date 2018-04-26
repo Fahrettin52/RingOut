@@ -96,8 +96,8 @@ public class Code_InGameMenuManager : Code_MenuManager {
             //Time.timeScale = 1;
             // Play the ambient music
             if (soundMng.volumeChecks[0].isOn && soundMng.volumeChecks[1].isOn) {
-                soundMng.musicAudioSource[0].mute = !soundMng.musicAudioSource[0].mute;
-                soundMng.musicAudioSource[1].mute = !soundMng.musicAudioSource[1].mute;
+                soundMng.musicAudioSource[0].mute = true;
+                soundMng.musicAudioSource[1].mute = false;
                 soundMng.PlayGameMusic();
             }
         }
@@ -108,8 +108,8 @@ public class Code_InGameMenuManager : Code_MenuManager {
 
             // Play the mainmenu music
             if (soundMng.volumeChecks[0].isOn && soundMng.volumeChecks[1].isOn) {
-                soundMng.musicAudioSource[0].mute = !soundMng.musicAudioSource[0].mute;
-                soundMng.musicAudioSource[1].mute = !soundMng.musicAudioSource[1].mute;
+                soundMng.musicAudioSource[0].mute = false;
+                soundMng.musicAudioSource[1].mute = true;
                 soundMng.PlayMainMenuMusic();                        
             }
         }

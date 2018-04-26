@@ -40,6 +40,10 @@ public class Code_Player : MonoBehaviour {
     public float knockbackTime; // How long the knockback effect lasts
     private float staminaRegen;
 
+    [Header("Teleport related")]
+    public bool didTP; //Checks if player teleported
+    public Transform[] tpList; // Array of tps, can be changed to list if so required
+
     [Header("Raycasts")]
     public LayerMask groundLayer;
     public Transform[] rcPos; // Positions of the raycasts
@@ -104,6 +108,7 @@ public class Code_Player : MonoBehaviour {
     void FixedUpdate() {        
         switch (moveState) {
             case MoveState.Normal:
+                CheckTeleport();
                 if (GroundChecks()) {
                     if (!keyboardControlled) {
                         Movement();
@@ -116,6 +121,15 @@ public class Code_Player : MonoBehaviour {
             case MoveState.Knockedback:
                 Knockback();
                 break;
+        }
+    }
+
+    // Handles the Teleportation
+    public void CheckTeleport() {
+        if (!didTP && Input.GetButtonDown("YButton" + playerNumberString)) {
+            didTP = true;
+            int random = Random.Range(0, 4);
+            transform.position = tpList[random].position;
         }
     }
 
@@ -301,6 +315,11 @@ public class Code_Player : MonoBehaviour {
         // TODO fill this function with more functionality regarding dieing
         SwitchMoveState(MoveState.Death);
         rigidbod.velocity = new Vector3(0f, rigidbod.velocity.y, 0f);
+    }
+
+    public void ResetPlayer() {
+        didTP = false;
+        ResetStamina();
     }
 
     // Is the only Function that call StartKnockback() and should be removed/changed once the shields are being implemented

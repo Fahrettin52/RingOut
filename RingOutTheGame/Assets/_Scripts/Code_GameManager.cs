@@ -70,7 +70,7 @@ public class Code_GameManager : MonoBehaviour {
         FillActivePlayerList();
 
         // Turn off the Main Menu Music sound
-        soundMng.musicAudioSource[0].mute = !soundMng.musicAudioSource[0].mute;
+        soundMng.musicAudioSource[0].mute = true;
 
         // Play the Game Music sound
         soundMng.PlayGameMusic();
@@ -151,7 +151,7 @@ public class Code_GameManager : MonoBehaviour {
             AllowMovement();
 
             // Activate the arena crumble
-            arena.StartCrumble();
+            arena.ActivateFallProcess();
             firstTimeStarting = true;
         }
         else {            
@@ -254,7 +254,7 @@ public class Code_GameManager : MonoBehaviour {
 
         // Reset player stamina if necesarry
         foreach (GameObject player in activePlayers) {
-            player.GetComponent<Code_Player>().ResetStamina();
+            player.GetComponent<Code_Player>().ResetPlayer();
         }
 
         // Call SpawnPlayers

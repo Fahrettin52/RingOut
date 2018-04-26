@@ -1,0 +1,641 @@
+fileFormatVersion: 2
+guid: de4d3369c28cb244e9397c8ef063ddf1
+timeCreated: 1524722976
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Froggo
+    100002: Grass
+    100004: Grass 1
+    100006: Grass1
+    100008: Grass10
+    100010: Grass11
+    100012: Grass12
+    100014: Grass13
+    100016: Grass14
+    100018: Grass15
+    100020: Grass16
+    100022: Grass17
+    100024: Grass18
+    100026: Grass19
+    100028: Grass20
+    100030: Grass21
+    100032: Grass22
+    100034: Grass23
+    100036: Grass24
+    100038: Grass25
+    100040: Grass26
+    100042: Grass27
+    100044: Grass28
+    100046: Grass29
+    100048: Grass4
+    100050: Grass5
+    100052: Grass6
+    100054: Grass7
+    100056: Grass8
+    100058: Grass9
+    100060: Island
+    100062: //RootNode
+    100064: Lilypad
+    100066: Lilypad1
+    100068: Lilypad10
+    100070: Lilypad11
+    100072: Lilypad12
+    100074: Lilypad2
+    100076: Lilypad3
+    100078: Lilypad4
+    100080: Lilypad5
+    100082: Lilypad6
+    100084: Lilypad7
+    100086: Lilypad8
+    100088: Lilypad9
+    100090: Lilypads
+    100092: MiniWaterfall
+    100094: NatureProps
+    100096: Ring1
+    100098: Ring1_Grp
+    100100: Ring2
+    100102: Ring2_Grp
+    100104: Ring3
+    100106: Ring3_Grp
+    100108: Ring4
+    100110: Ring4_Grp
+    100112: Rock1
+    100114: Rock10
+    100116: Rock10 1
+    100118: Rock10 2
+    100120: Rock11
+    100122: Rock11 1
+    100124: Rock11 2
+    100126: Rock12
+    100128: Rock12 1
+    100130: Rock12 2
+    100132: Rock13
+    100134: Rock13 1
+    100136: Rock13 2
+    100138: Rock14
+    100140: Rock14 1
+    100142: Rock14 2
+    100144: Rock15
+    100146: Rock16
+    100148: Rock17
+    100150: Rock18
+    100152: Rock19
+    100154: Rock2
+    100156: Rock20
+    100158: Rock21
+    100160: Rock22
+    100162: Rock23
+    100164: Rock24
+    100166: Rock25
+    100168: Rock26
+    100170: Rock27
+    100172: Rock28
+    100174: Rock29
+    100176: Rock3
+    100178: Rock30
+    100180: Rock31
+    100182: Rock32
+    100184: Rock33
+    100186: Rock34
+    100188: Rock4
+    100190: Rock5
+    100192: Rock6
+    100194: Rock7
+    100196: Rock7 1
+    100198: Rock7 2
+    100200: Rock8
+    100202: Rock9
+    100204: Rock9 1
+    100206: Rock9 2
+    100208: Rocks_Collision
+    100210: Rocks_Small
+    100212: Wall
+    100214: Waterfall
+    100216: Waterfall1
+    100218: Waterfall10
+    100220: Waterfall2
+    100222: Waterfall3
+    100224: Waterfall4
+    100226: Waterfall5
+    100228: Waterfall6
+    100230: Waterfall7
+    100232: Waterfall8
+    100234: Waterfall9
+    100236: WaterPlanes
+    400000: Froggo
+    400002: Grass
+    400004: Grass 1
+    400006: Grass1
+    400008: Grass10
+    400010: Grass11
+    400012: Grass12
+    400014: Grass13
+    400016: Grass14
+    400018: Grass15
+    400020: Grass16
+    400022: Grass17
+    400024: Grass18
+    400026: Grass19
+    400028: Grass20
+    400030: Grass21
+    400032: Grass22
+    400034: Grass23
+    400036: Grass24
+    400038: Grass25
+    400040: Grass26
+    400042: Grass27
+    400044: Grass28
+    400046: Grass29
+    400048: Grass4
+    400050: Grass5
+    400052: Grass6
+    400054: Grass7
+    400056: Grass8
+    400058: Grass9
+    400060: Island
+    400062: //RootNode
+    400064: Lilypad
+    400066: Lilypad1
+    400068: Lilypad10
+    400070: Lilypad11
+    400072: Lilypad12
+    400074: Lilypad2
+    400076: Lilypad3
+    400078: Lilypad4
+    400080: Lilypad5
+    400082: Lilypad6
+    400084: Lilypad7
+    400086: Lilypad8
+    400088: Lilypad9
+    400090: Lilypads
+    400092: MiniWaterfall
+    400094: NatureProps
+    400096: Ring1
+    400098: Ring1_Grp
+    400100: Ring2
+    400102: Ring2_Grp
+    400104: Ring3
+    400106: Ring3_Grp
+    400108: Ring4
+    400110: Ring4_Grp
+    400112: Rock1
+    400114: Rock10
+    400116: Rock10 1
+    400118: Rock10 2
+    400120: Rock11
+    400122: Rock11 1
+    400124: Rock11 2
+    400126: Rock12
+    400128: Rock12 1
+    400130: Rock12 2
+    400132: Rock13
+    400134: Rock13 1
+    400136: Rock13 2
+    400138: Rock14
+    400140: Rock14 1
+    400142: Rock14 2
+    400144: Rock15
+    400146: Rock16
+    400148: Rock17
+    400150: Rock18
+    400152: Rock19
+    400154: Rock2
+    400156: Rock20
+    400158: Rock21
+    400160: Rock22
+    400162: Rock23
+    400164: Rock24
+    400166: Rock25
+    400168: Rock26
+    400170: Rock27
+    400172: Rock28
+    400174: Rock29
+    400176: Rock3
+    400178: Rock30
+    400180: Rock31
+    400182: Rock32
+    400184: Rock33
+    400186: Rock34
+    400188: Rock4
+    400190: Rock5
+    400192: Rock6
+    400194: Rock7
+    400196: Rock7 1
+    400198: Rock7 2
+    400200: Rock8
+    400202: Rock9
+    400204: Rock9 1
+    400206: Rock9 2
+    400208: Rocks_Collision
+    400210: Rocks_Small
+    400212: Wall
+    400214: Waterfall
+    400216: Waterfall1
+    400218: Waterfall10
+    400220: Waterfall2
+    400222: Waterfall3
+    400224: Waterfall4
+    400226: Waterfall5
+    400228: Waterfall6
+    400230: Waterfall7
+    400232: Waterfall8
+    400234: Waterfall9
+    400236: WaterPlanes
+    2100000: Platformers
+    2300000: Froggo
+    2300002: Grass1
+    2300004: Grass10
+    2300006: Grass11
+    2300008: Grass12
+    2300010: Grass13
+    2300012: Grass14
+    2300014: Grass15
+    2300016: Grass16
+    2300018: Grass17
+    2300020: Grass18
+    2300022: Grass19
+    2300024: Grass20
+    2300026: Grass21
+    2300028: Grass22
+    2300030: Grass23
+    2300032: Grass24
+    2300034: Grass25
+    2300036: Grass26
+    2300038: Grass27
+    2300040: Grass28
+    2300042: Grass29
+    2300044: Grass4
+    2300046: Grass5
+    2300048: Grass6
+    2300050: Grass7
+    2300052: Grass8
+    2300054: Grass9
+    2300056: Lilypad
+    2300058: Lilypad1
+    2300060: Lilypad10
+    2300062: Lilypad11
+    2300064: Lilypad12
+    2300066: Lilypad2
+    2300068: Lilypad3
+    2300070: Lilypad4
+    2300072: Lilypad5
+    2300074: Lilypad6
+    2300076: Lilypad7
+    2300078: Lilypad8
+    2300080: Lilypad9
+    2300082: Ring1
+    2300084: Ring2
+    2300086: Ring3
+    2300088: Ring4
+    2300090: Rock1
+    2300092: Rock10
+    2300094: Rock10 1
+    2300096: Rock10 2
+    2300098: Rock11
+    2300100: Rock11 1
+    2300102: Rock11 2
+    2300104: Rock12
+    2300106: Rock12 1
+    2300108: Rock12 2
+    2300110: Rock13
+    2300112: Rock13 1
+    2300114: Rock13 2
+    2300116: Rock14
+    2300118: Rock14 1
+    2300120: Rock14 2
+    2300122: Rock15
+    2300124: Rock16
+    2300126: Rock17
+    2300128: Rock18
+    2300130: Rock19
+    2300132: Rock2
+    2300134: Rock20
+    2300136: Rock21
+    2300138: Rock22
+    2300140: Rock23
+    2300142: Rock24
+    2300144: Rock25
+    2300146: Rock26
+    2300148: Rock27
+    2300150: Rock28
+    2300152: Rock29
+    2300154: Rock3
+    2300156: Rock30
+    2300158: Rock31
+    2300160: Rock32
+    2300162: Rock33
+    2300164: Rock34
+    2300166: Rock4
+    2300168: Rock5
+    2300170: Rock6
+    2300172: Rock7
+    2300174: Rock7 1
+    2300176: Rock7 2
+    2300178: Rock8
+    2300180: Rock9
+    2300182: Rock9 1
+    2300184: Rock9 2
+    2300186: Wall
+    2300188: Waterfall
+    2300190: Waterfall1
+    2300192: Waterfall10
+    2300194: Waterfall2
+    2300196: Waterfall3
+    2300198: Waterfall4
+    2300200: Waterfall5
+    2300202: Waterfall6
+    2300204: Waterfall7
+    2300206: Waterfall8
+    2300208: Waterfall9
+    3300000: Froggo
+    3300002: Grass1
+    3300004: Grass10
+    3300006: Grass11
+    3300008: Grass12
+    3300010: Grass13
+    3300012: Grass14
+    3300014: Grass15
+    3300016: Grass16
+    3300018: Grass17
+    3300020: Grass18
+    3300022: Grass19
+    3300024: Grass20
+    3300026: Grass21
+    3300028: Grass22
+    3300030: Grass23
+    3300032: Grass24
+    3300034: Grass25
+    3300036: Grass26
+    3300038: Grass27
+    3300040: Grass28
+    3300042: Grass29
+    3300044: Grass4
+    3300046: Grass5
+    3300048: Grass6
+    3300050: Grass7
+    3300052: Grass8
+    3300054: Grass9
+    3300056: Lilypad
+    3300058: Lilypad1
+    3300060: Lilypad10
+    3300062: Lilypad11
+    3300064: Lilypad12
+    3300066: Lilypad2
+    3300068: Lilypad3
+    3300070: Lilypad4
+    3300072: Lilypad5
+    3300074: Lilypad6
+    3300076: Lilypad7
+    3300078: Lilypad8
+    3300080: Lilypad9
+    3300082: Ring1
+    3300084: Ring2
+    3300086: Ring3
+    3300088: Ring4
+    3300090: Rock1
+    3300092: Rock10
+    3300094: Rock10 1
+    3300096: Rock10 2
+    3300098: Rock11
+    3300100: Rock11 1
+    3300102: Rock11 2
+    3300104: Rock12
+    3300106: Rock12 1
+    3300108: Rock12 2
+    3300110: Rock13
+    3300112: Rock13 1
+    3300114: Rock13 2
+    3300116: Rock14
+    3300118: Rock14 1
+    3300120: Rock14 2
+    3300122: Rock15
+    3300124: Rock16
+    3300126: Rock17
+    3300128: Rock18
+    3300130: Rock19
+    3300132: Rock2
+    3300134: Rock20
+    3300136: Rock21
+    3300138: Rock22
+    3300140: Rock23
+    3300142: Rock24
+    3300144: Rock25
+    3300146: Rock26
+    3300148: Rock27
+    3300150: Rock28
+    3300152: Rock29
+    3300154: Rock3
+    3300156: Rock30
+    3300158: Rock31
+    3300160: Rock32
+    3300162: Rock33
+    3300164: Rock34
+    3300166: Rock4
+    3300168: Rock5
+    3300170: Rock6
+    3300172: Rock7
+    3300174: Rock7 1
+    3300176: Rock7 2
+    3300178: Rock8
+    3300180: Rock9
+    3300182: Rock9 1
+    3300184: Rock9 2
+    3300186: Wall
+    3300188: Waterfall
+    3300190: Waterfall1
+    3300192: Waterfall10
+    3300194: Waterfall2
+    3300196: Waterfall3
+    3300198: Waterfall4
+    3300200: Waterfall5
+    3300202: Waterfall6
+    3300204: Waterfall7
+    3300206: Waterfall8
+    3300208: Waterfall9
+    4300000: Ring1
+    4300002: Froggo
+    4300004: Grass26
+    4300006: Grass28
+    4300008: Grass29
+    4300010: Ring2
+    4300012: Wall
+    4300014: Rock20
+    4300016: Rock23
+    4300018: Rock22
+    4300020: Rock16
+    4300022: Waterfall10
+    4300024: Rock21
+    4300026: Rock19
+    4300028: Grass23
+    4300030: Grass24
+    4300032: Grass25
+    4300034: Grass22
+    4300036: Rock3
+    4300038: Rock6
+    4300040: Rock5
+    4300042: Rock4
+    4300044: Rock24
+    4300046: Rock25
+    4300048: Rock26
+    4300050: Rock27
+    4300052: Rock28
+    4300054: Rock29
+    4300056: Rock30
+    4300058: Rock31
+    4300060: Ring3
+    4300062: Lilypad11
+    4300064: Lilypad10
+    4300066: Lilypad1
+    4300068: Lilypad2
+    4300070: Lilypad3
+    4300072: Lilypad4
+    4300074: Lilypad5
+    4300076: Lilypad6
+    4300078: Lilypad7
+    4300080: Lilypad8
+    4300082: Lilypad9
+    4300084: Lilypad12
+    4300086: Waterfall
+    4300088: Waterfall9
+    4300090: Waterfall8
+    4300092: Waterfall7
+    4300094: Waterfall6
+    4300096: Waterfall5
+    4300098: Waterfall4
+    4300100: Waterfall3
+    4300102: Waterfall2
+    4300104: Waterfall1
+    4300106: Ring4
+    4300108: Grass4
+    4300110: Grass5
+    4300112: Grass6
+    4300114: Grass8
+    4300116: Grass9
+    4300118: Grass10
+    4300120: Grass7
+    4300122: Grass11
+    4300124: Grass12
+    4300126: Grass13
+    4300128: Grass14
+    4300130: Grass15
+    4300132: Grass16
+    4300134: Grass17
+    4300136: Grass18
+    4300138: Grass19
+    4300140: Grass20
+    4300142: Grass21
+    4300144: Grass27
+    4300146: Rock18
+    4300148: Rock17
+    4300150: Rock14
+    4300152: Rock11
+    4300154: Rock10
+    4300156: Rock9
+    4300158: Rock13
+    4300160: Rock12
+    4300162: Rock7
+    4300164: Rock15
+    4300166: Rock14
+    4300168: Rock11
+    4300170: Rock10
+    4300172: Rock9
+    4300174: Rock13
+    4300176: Rock12
+    4300178: Rock7
+    4300180: Rock8
+    4300182: Rock14
+    4300184: Rock11
+    4300186: Rock10
+    4300188: Rock9
+    4300190: Rock13
+    4300192: Rock12
+    4300194: Rock7
+    4300196: Rock33
+    4300198: Rock34
+    4300200: Rock32
+    4300202: Rock1
+    4300204: Rock2
+    4300206: Grass1
+    4300208: Lilypad
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
