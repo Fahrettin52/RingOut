@@ -1659,8 +1659,7 @@ Prefab:
         type: 2}
       propertyPath: teleportImage
       value: 
-      objectReference: {fileID: 21300000, guid: 7d6c0c70fe76e024bacfbef8faf5426e,
-        type: 3}
+      objectReference: {fileID: 347619213}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: de9a67168feb5114aba4a73e16e6fbda, type: 2}
   m_IsPrefabParent: 0
@@ -1674,6 +1673,12 @@ GameObject:
   m_PrefabParentObject: {fileID: 1936532488741708, guid: de9a67168feb5114aba4a73e16e6fbda,
     type: 2}
   m_PrefabInternal: {fileID: 346608884}
+--- !u!114 &347619213 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114578945704683920, guid: de9a67168feb5114aba4a73e16e6fbda,
+    type: 2}
+  m_PrefabInternal: {fileID: 346608884}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &382289176
 GameObject:
   m_ObjectHideFlags: 0
@@ -2171,6 +2176,12 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 453998497}
+--- !u!114 &461552879 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114578945704683920, guid: de9a67168feb5114aba4a73e16e6fbda,
+    type: 2}
+  m_PrefabInternal: {fileID: 1179136784}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &464655562
 GameObject:
   m_ObjectHideFlags: 0
@@ -2595,6 +2606,12 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 528437596}
+--- !u!114 &584100670 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114578945704683920, guid: de9a67168feb5114aba4a73e16e6fbda,
+    type: 2}
+  m_PrefabInternal: {fileID: 1372441255}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &589232642 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1321051525788204, guid: 844a27ccdd900ad4cb9280c4302a2145,
@@ -5087,8 +5104,7 @@ Prefab:
         type: 2}
       propertyPath: teleportImage
       value: 
-      objectReference: {fileID: 21300000, guid: 7d6c0c70fe76e024bacfbef8faf5426e,
-        type: 3}
+      objectReference: {fileID: 461552879}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: de9a67168feb5114aba4a73e16e6fbda, type: 2}
   m_IsPrefabParent: 0
@@ -5699,8 +5715,7 @@ Prefab:
         type: 2}
       propertyPath: teleportImage
       value: 
-      objectReference: {fileID: 21300000, guid: 7d6c0c70fe76e024bacfbef8faf5426e,
-        type: 3}
+      objectReference: {fileID: 584100670}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: de9a67168feb5114aba4a73e16e6fbda, type: 2}
   m_IsPrefabParent: 0

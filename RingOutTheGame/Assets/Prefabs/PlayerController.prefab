@@ -623,8 +623,9 @@ MonoBehaviour:
   attackCost: 15
   staminaRegenAmount: 5
   staminaRegenRate: 1
-  teleportImage: {fileID: 21300000, guid: 7d6c0c70fe76e024bacfbef8faf5426e, type: 3}
-  teleportIcon: {fileID: 114578945704683920}
+  teleportNotUsed: {fileID: 21300000, guid: 74ee0d5890fd03f41829a75b51262bd1, type: 3}
+  teleportUsed: {fileID: 21300000, guid: 7d6c0c70fe76e024bacfbef8faf5426e, type: 3}
+  teleportImage: {fileID: 114578945704683920}
   knockbackSpeed: 10
   knockbackTime: 0.5
   didTP: 0
