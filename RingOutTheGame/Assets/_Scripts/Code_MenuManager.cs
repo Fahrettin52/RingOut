@@ -11,12 +11,14 @@ public class Code_MenuManager : MonoBehaviour {
     public List<GameObject> settingsButtons = new List<GameObject>(); // The list that contains all the buttons in the settings menu
     public List<GameObject> controlButtons = new List<GameObject>(); // The list that contains all the buttons in the controls menu
     public List<GameObject> confirmQuitButtons = new List<GameObject>(); // The list that contains all the buttons in the confirm quit menu
+    public List<GameObject> playAgainButtons = new List<GameObject>(); // The list that contains all the buttons in the play again menu
 
     public GameObject playerSelectMenu; // The player select gameobject
     public GameObject mainMenuBorder; // The main menu gameobject
     public GameObject settingsMenu; // The settingsmenu gameobject
     public GameObject controlsMenu; // The controls menu gameobject
     public GameObject confirmQuit; // The confirm quit menu gameobject
+    public GameObject playAgain; // The play again menu gameobject
 
     public GameObject soundManager; // Store the soundmanager 
 
@@ -114,6 +116,13 @@ public class Code_MenuManager : MonoBehaviour {
                 confirmQuit.SetActive(!confirmQuit.activeSelf);
                 // Select the button that activates the confirmquitmenu
                 PickFirstButton(confirmQuitButtons, !confirmQuit.activeSelf, number);
+                break;
+            case 6:
+                // Toggle the playagain menu
+                mainMenuBorder.SetActive(!mainMenuBorder.activeSelf);
+                playAgain.SetActive(!playAgain.activeSelf);
+                // Select the button that activates the playagain menu
+                PickFirstButton(playAgainButtons, !playAgain.activeSelf, 6);
                 break;
             // If non of the above methodes are called break the code
             default:

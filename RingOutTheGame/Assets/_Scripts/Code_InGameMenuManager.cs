@@ -73,6 +73,13 @@ public class Code_InGameMenuManager : Code_MenuManager {
                 confirmQuitButtons.Add(item.gameObject);
             }
         }
+        // Add all the buttons in the replayagaintmenu to the playagain list
+        foreach (Transform item in playAgain.transform) {
+            // Only add the buttons to the list
+            if (item.GetComponent<Button>() != null) {
+                playAgainButtons.Add(item.gameObject);
+            }
+        }
         // Pick the first button in the mainmenu 
         PickFirstButton(playerSelectMenuButtons, !playerSelectMenu.activeSelf, 0);
     }

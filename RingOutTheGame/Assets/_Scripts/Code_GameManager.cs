@@ -27,6 +27,7 @@ public class Code_GameManager : MonoBehaviour {
 
     [Header("PlayerSelect")]
     public GameObject playerSelectMenu; // Menu for the player selection screen
+    public GameObject playAgainMenu; // Menu for the replay game
 
     [Header("Sound")]
     public Code_SoundManager soundMng; // The sound manager
@@ -227,12 +228,15 @@ public class Code_GameManager : MonoBehaviour {
     private IEnumerator RestartFromVictory() {
         yield return new WaitForSeconds(3f); // TODO replace the 3f with a public variable        
         victoryBanner.SetActive(false);
-        RestartWithSameNumbers();
         TogglePause();
+        ingameMng.ToggleMenus(6);
     }
     
     // Restarts when the game with the same amount of players
     public void RestartWithSameNumbers() {
+        // turn off the playagain menu
+        ingameMng.playAgain.SetActive(!ingameMng.playAgain.activeSelf);
+
         // Set all players to non-active
         FillActivePlayerList();
 
