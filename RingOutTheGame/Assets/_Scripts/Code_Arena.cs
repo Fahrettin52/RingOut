@@ -47,7 +47,7 @@ public class Code_Arena : MonoBehaviour {
     // To check if the player falls off the arena
     public void OnTriggerEnter(Collider col) {
         if (col.transform.CompareTag("Player")) {
-            col.GetComponent<Code_Player>().Die();
+            col.GetComponent<Code_Player>().death();
             gameMng.GetComponent<Code_GameManager>().CheckForVictory(col.transform.gameObject);
         }
     }

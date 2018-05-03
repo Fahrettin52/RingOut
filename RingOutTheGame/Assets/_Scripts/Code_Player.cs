@@ -61,6 +61,14 @@ public class Code_Player : MonoBehaviour {
 
     private Animator playerAnim; // From the player child object
 
+    [Header("PickUp Related")]
+    public float deathShieldTimer;
+    public ParticleSystem deathShieldPS;
+
+    public delegate void DeathDel();
+    public DeathDel death;
+    private Coroutine deathShieldCoroutine;
+
     // Use this for initialization
     private void Start() {
         SetStartVariables();
@@ -131,10 +139,15 @@ public class Code_Player : MonoBehaviour {
     public void CheckTeleport() {
         if (!didTP && Input.GetButton("YButton" + playerNumberString)) {
             didTP = true;
-            int random = Random.Range(0, 4);
-            transform.position = tpList[random].position;
+            Teleport();
             teleportImage.sprite = teleportUsed;
         }
+    }
+
+    // Performs a teleportation
+    private void Teleport() {
+        int random = Random.Range(0, 4);
+        transform.position = tpList[random].position;
     }
 
     // Checks if the player is touching ground
@@ -208,7 +221,6 @@ public class Code_Player : MonoBehaviour {
         if (Input.GetButtonDown("Jump" + playerNumber)) {
             // Making sure that stamina never gets below 0
             if (stamina - attackCost >= 0) {
-                print("Game is paused, shouldn't be attacking anything!");
                 SwitchMoveState(MoveState.Attacking);
                 shieldCode.Attack();
                 stamina -= attackCost;
@@ -306,6 +318,7 @@ public class Code_Player : MonoBehaviour {
 
     // Sets any variable that needs to be set during Start()
     private void SetStartVariables (){
+        ResetDelegates();
         playerNumberString = playerNumber.ToString();
         startStamina = stamina;
         startKnockbackSpeed = knockbackSpeed;
@@ -315,16 +328,59 @@ public class Code_Player : MonoBehaviour {
     }
 
     // When the player falls off the arena
-    public void Die() { 
+    private void Die() { 
         // TODO fill this function with more functionality regarding dieing
         SwitchMoveState(MoveState.Death);
         rigidbod.velocity = new Vector3(0f, rigidbod.velocity.y, 0f);
     }
 
+    // Sets the death delegate to Die()
+    private void SetDie() {
+        death = Die;
+        if (deathShieldPS.isEmitting) {
+            deathShieldPS.Stop();
+        }
+    }
+
+    // A shield that protects the player
+    private void DeathShield() {
+        SetDie();
+        Teleport();        
+    }
+
+    // Turns the death into DeathShield
+    public void SetDeathShield() {
+        if (death != DeathShield) {
+            death = DeathShield;
+            deathShieldPS.Play();
+            deathShieldCoroutine = StartCoroutine(DeathShieldCountdown());            
+        }
+    }
+
+    // Counts down and at the end of it turns of the deathshield
+    private IEnumerator DeathShieldCountdown() {
+        yield return new WaitForSeconds(deathShieldTimer);
+        if (death == DeathShield) {
+            SetDie();
+        }        
+    }
+
+    // Resets the players when the players choose to continue the match
     public void ResetPlayer() {
         didTP = false;
+        ResetDelegates();
         ResetStamina();
         teleportImage.sprite = teleportNotUsed;
+    }
+
+    // Resets all the delegates upon resetting the game
+    private void ResetDelegates() {
+        if (death != Die) {
+            SetDie();
+            if (deathShieldCoroutine != null) {
+                StopCoroutine(deathShieldCoroutine);
+            }            
+        }
     }
 
     // Is the only Function that call StartKnockback() and should be removed/changed once the shields are being implemented
