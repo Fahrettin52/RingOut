@@ -38,6 +38,9 @@ public class Code_GameManager : MonoBehaviour {
     public GameObject countdownBanner; // Banner for the countdown UI
     public Text countdownText; // The text that'll hold the countdown
 
+    [Header("PickUp Manager")]
+    public Code_PickUpManager pickUpMng; // The Code_PickUpManager currently in the scene
+
     [Header("Victory Banner")]
     public GameObject victoryBanner; // The sprite that appears once there's a winner
     public Text victoryMessageText; // Message holder in the VictoryBanner GameObject
@@ -193,7 +196,7 @@ public class Code_GameManager : MonoBehaviour {
             ingameMng.allowStart = false;
             activePlayers[0].GetComponent<Code_Player>().VictoryDance();
             AnnounceWinner(activePlayers[0].GetComponent<Code_Player>());
-            bouncer.StopCurrentCoroutine();
+            bouncer.StopCurrentCoroutine();            
             StartCoroutine(RestartFromVictory());
         }
     }
@@ -252,6 +255,9 @@ public class Code_GameManager : MonoBehaviour {
         arena.bouncer = bouncer;
         // Reset the bouncers position
         bouncer.ResetPosition();
+
+        // Reset the pickUpMng
+        pickUpMng.ResetPickUps();
 
         // Reset firstTimeStarting
         firstTimeStarting = false;

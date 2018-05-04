@@ -42,14 +42,11 @@ public class Code_Arena : MonoBehaviour {
             currentRing++;
             StartCoroutine(TimeBetweenActivations(ringActivationTime));
         }        
-    }    
+    }
 
-    // To check if the player falls off the arena
-    public void OnTriggerEnter(Collider col) {
-        if (col.transform.CompareTag("Player")) {
-            col.GetComponent<Code_Player>().death();
-            gameMng.GetComponent<Code_GameManager>().CheckForVictory(col.transform.gameObject);
-        }
+    // Sends the value of currentRing to whoever reqeusts it
+    public int GetCurrentRingValue() {
+        return currentRing;
     }
 
     // Activates the bouncer
@@ -63,4 +60,19 @@ public class Code_Arena : MonoBehaviour {
             ringsLengthDecreaser += ringsToBeSaved;
         }
     }
+
+    // To check if the player falls off the arena
+    public void OnTriggerEnter(Collider col) {
+        if (col.transform.CompareTag("Player")) {
+            // Check to see if the player actually died before checking for a victory
+            if (col.GetComponent<Code_Player>().death()) {
+                gameMng.GetComponent<Code_GameManager>().CheckForVictory(col.transform.gameObject);
+            }
+        }
+
+        // If a PickUp object fall down
+        if (col.transform.tag == "PickUp") {
+            col.GetComponent<Code_PickUp>().PoolPickUp();
+        }
+    }    
 }
