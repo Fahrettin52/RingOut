@@ -65,7 +65,7 @@ public class Code_Player : MonoBehaviour {
     public float deathShieldTimer;
     public ParticleSystem deathShieldPS;
 
-    public delegate void DeathDel();
+    public delegate bool DeathDel();
     public DeathDel death;
     private Coroutine deathShieldCoroutine;
 
@@ -328,10 +328,12 @@ public class Code_Player : MonoBehaviour {
     }
 
     // When the player falls off the arena
-    private void Die() { 
+    private bool Die() { 
         // TODO fill this function with more functionality regarding dieing
         SwitchMoveState(MoveState.Death);
         rigidbod.velocity = new Vector3(0f, rigidbod.velocity.y, 0f);
+        // Returns true because the player "died"
+        return true;
     }
 
     // Sets the death delegate to Die()
@@ -340,12 +342,14 @@ public class Code_Player : MonoBehaviour {
         if (deathShieldPS.isEmitting) {
             deathShieldPS.Stop();
         }
-    }
+    }   
 
     // A shield that protects the player
-    private void DeathShield() {
+    private bool DeathShield() {
         SetDie();
-        Teleport();        
+        Teleport();
+        // Returns false because the player didn't "die"
+        return false;
     }
 
     // Turns the death into DeathShield
@@ -355,6 +359,11 @@ public class Code_Player : MonoBehaviour {
             deathShieldPS.Play();
             deathShieldCoroutine = StartCoroutine(DeathShieldCountdown());            
         }
+    }
+
+    // Sends back whether the players death is DeathShield or not
+    public bool GetDeathShield() {        
+        return death == DeathShield;
     }
 
     // Counts down and at the end of it turns of the deathshield
