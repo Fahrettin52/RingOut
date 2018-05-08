@@ -22,6 +22,9 @@ public class Code_GameManager : MonoBehaviour {
     [Header("Bouncer")]
     public BouncerControl bouncer; // The bouncer object present in the scene
 
+    [Header("Camera")]
+    public Code_CameraControl camCon;
+
     [Header("Ingame Menu")]
     public Code_InGameMenuManager ingameMng; // The Code_IngameManager in the scene
 
@@ -66,6 +69,9 @@ public class Code_GameManager : MonoBehaviour {
     public void SelectedNumberOfPlayers(int numberOfPlayers) {
         playersSelected = numberOfPlayers;
         countdownSecondsSaved = countdownSeconds;
+
+        // Change the first two curBonus indexes based on the playersSelected
+        camCon.ChangeBonusValues(playersSelected);
 
         // Selects which spawnpoint position should be used
         FillSpawnPositions();
@@ -266,6 +272,9 @@ public class Code_GameManager : MonoBehaviour {
         foreach (GameObject player in activePlayers) {
             player.GetComponent<Code_Player>().ResetPlayer();
         }
+
+        // Reset the Camera bonus
+        camCon.UpdateBonuses(-1); // The UpdateBonusses itself increments the int value with 1
 
         // Call SpawnPlayers
         SpawnPlayers();

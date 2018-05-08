@@ -8,6 +8,7 @@ public class Code_CameraFocus : MonoBehaviour {
     public float halfYBounds;
     public float halfZBounds;
 
+    [HideInInspector]
     public Bounds focusBounds;
 
     void Update () {

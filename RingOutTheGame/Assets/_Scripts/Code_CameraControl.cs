@@ -2,80 +2,125 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Code_CameraControl : MonoBehaviour {
+public class Code_CameraControl : MonoBehaviour
+{
 
-    public Code_CameraFocus focus;
+    public Code_CameraFocus focus; // A point of focus that helps to balance the center
 
-    public List<GameObject> players;
+    public List<GameObject> players; // A list of players filled in the editor
 
-    public float cameraSpeed;
+    public float speed; // Determines how fast the camera moves around
 
-    public float zoomMax;
-    public float zoomMin;
+    public float zoomMax; // Determines how far out the camera is allowed to zoum
+    public float zoomMin; // Determines how far in the camera is allowed to zoom
 
-    public float angleMax;
-    public float angleMin;
+    [Header("Bonuses for the camera")]
+    public float[] zoomBonus; // Adds an extra amount of range allowing for outside controll of the zomming
+    private int curBonus; // The current bonus in both the yBonus and zoomBonus arrays
+    public float[] yBonus; // Add an extra amount of range allowing for outside manipulation
+    private float yStartPos; // Gets the transform.position at the start of the game
 
-    private float cameraEulerX;
-    private Vector3 camPos;
+    [Header("ZoomBonus values based on the number of players selected")]
+    public int[] twoPlayersBonus; // all but the last indexes of the zoomBonus and yBonus, when two players were selected
+    public int[] threePlayersBonus; // all but the last indexes of the zoomBonus and yBonus, when three players were selected
+    public int[] fourPlayersBonus; // all but the last indexes of the zoomBonus and yBonus, when four players were selected
+
+    // Need to check and see if we want to move the angles of the camera
+    //public float angleMax;
+    //public float angleMin;
+
+    //private float cameraEulerX;
+    private Vector3 camPos; // The calculated future position of the camera
 
     // Use this for initialization
-    void Start () {
+    void Start() {
         players.Add(focus.gameObject);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        CalculateCameraLocations();
-        MoveCamera();
-
+        yStartPos = transform.position.y;
     }
 
+    // Update is called once per frame
+    void Update() {
+        CalculateCameraLocations();
+        MoveCamera();
+    }
+
+    // Calculates where the camera has to move to
     private void CalculateCameraLocations() {
-        Vector3 center = Vector3.zero;
         Vector3 total = Vector3.zero;
         Bounds playerBounds = new Bounds();
 
+        // Makes adds each members location to the foreach and then adds them to the total 
         foreach (GameObject p in players) {
             Vector3 pPos = p.transform.position;
-
+            // Checks if the player is still on top of the arena
             if (!focus.focusBounds.Contains(pPos)) {
-                float pX = Mathf.Clamp(pPos.x, focus.focusBounds.min.x, focus.focusBounds.max.x);
-                float pY = Mathf.Clamp(pPos.y, focus.focusBounds.min.y, focus.focusBounds.max.y);
-                float pZ = Mathf.Clamp(pPos.z, focus.focusBounds.min.z, focus.focusBounds.max.z);
-                pPos = new Vector3(pX, pY, pZ);
+                pPos = Vector3.zero;
             }
 
             total += pPos;
             playerBounds.Encapsulate(pPos);
         }
 
-        center = (total / players.Count);
+        // Create a center point for the camera to focus with
+        Vector3 centerPoint = (total / players.Count);
 
-        float extents = (playerBounds.extents.x + playerBounds.extents.y);
-        float lerpPercent = Mathf.InverseLerp(0, (focus.halfXBounds + focus.halfYBounds) / 2, extents);
+        // Calclates the lerpPrecentage
+        float extents = (playerBounds.extents.x + playerBounds.extents.z);
+        float lerpPercent = Mathf.InverseLerp(0, (focus.halfXBounds + focus.halfYBounds), extents);
 
+        //float angle = Mathf.Lerp(angleMax, angleMin, lerpPercent);
+        //cameraEulerX = angle;
+
+        // Zoom determines the maximum and minimum movement range for the camera
         float zoom = Mathf.Lerp(zoomMax, zoomMin, lerpPercent);
-        float angle = Mathf.Lerp(angleMax, angleMin, lerpPercent);
-
-        cameraEulerX = angle;
-        camPos = new Vector3(center.x, zoom, zoom*-1);
+        camPos = new Vector3(centerPoint.x, yStartPos - yBonus[curBonus], (zoom - zoomBonus[curBonus]) * -1f);
+        print("Curbonuds is " + curBonus);
     }
 
+    // The function that actually moves the camera proper
     private void MoveCamera() {
-        Vector3 position = transform.position;
-        if (position != camPos) {
-            Vector3 targetPos = Vector3.zero;
-            targetPos.x = Mathf.MoveTowards(position.x, camPos.x, cameraSpeed * Time.deltaTime);
-            targetPos.y = Mathf.MoveTowards(position.y, camPos.y, cameraSpeed * Time.deltaTime);
-            targetPos.z = Mathf.MoveTowards(position.z, camPos.z, cameraSpeed * Time.deltaTime);
-            transform.position = targetPos;
+        // Moves the camera to the camPos if it's not aligned correctly
+        Vector3 pos = transform.position;
+        if (pos != camPos) {
+            transform.position = Vector3.MoveTowards(pos, camPos, speed * Time.deltaTime);
         }
 
-        Vector3 localEuler = transform.localEulerAngles;
-        if (localEuler.x != cameraEulerX) {
-            Vector3 targetEuler = new Vector3(cameraEulerX, localEuler.y, localEuler.z);
-            transform.localEulerAngles = Vector3.MoveTowards(localEuler, targetEuler, cameraSpeed * Time.deltaTime);
+        //moves the angles of the camera
+        //vector3 localeuler = transform.localeulerangles;
+        //if (localeuler.x != cameraeulerx) {
+        //    vector3 targeteuler = new vector3(cameraeulerx, localeuler.y, localeuler.z);
+        //    transform.localeulerangles = vector3.movetowards(localeuler, targeteuler, cameraspeed * time.deltatime);
+        //}
+    }
+
+    // Updates the curBonus which will the determine the value of both the yBonus and zoomBonus
+    public void UpdateBonuses(int curRing) {
+        curRing++;
+        if (curRing < zoomBonus.Length) {
+            print("curRing is valued customer");
+            curBonus = curRing;
         }
     }    
+
+    // Change the values of the zoomBonus items, all but the last, according to the playersSelected
+    public void ChangeBonusValues(int numOfPlayers) {
+        // First determines which bonus array should be used
+        List<int> playerBonusList = new List<int>();
+        switch (numOfPlayers) {
+            case 2:
+                playerBonusList = new List<int>(twoPlayersBonus);
+                break;
+            case 3:
+                playerBonusList = new List<int>(threePlayersBonus);
+                break;
+            case 4:
+                playerBonusList = new List<int>(fourPlayersBonus);
+                break;
+        }
+
+        // Then changes the values of the zoomBonus array, All but the last item
+        for (int i = 0; i < zoomBonus.Length - 1; i++) {
+            zoomBonus[i] = playerBonusList[i];
+        }
+    }
 }

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Code_Arena : MonoBehaviour {
-    private GameObject gameMng; // The GameMng GameObject in the scene
-    public BouncerControl bouncer;
+    private Code_GameManager gameMng; // The GameMng GameObject in the scene
+    public BouncerControl bouncer; // The bouncer object in the scene
 
     public GameObject[] rings; // The rings that have to be crumbled
     private int currentRing; // The current ring selecting in the rings Array
@@ -15,7 +15,7 @@ public class Code_Arena : MonoBehaviour {
     // Use this for initialization
     void Start () {
         // Selects the gameMng
-        gameMng = GameObject.FindGameObjectWithTag("GameMng");
+        gameMng = GameObject.FindGameObjectWithTag("GameMng").GetComponent<Code_GameManager>();
 
         // To set a minimum for this variable
         if (ringsToBeSaved == 0) {
@@ -39,6 +39,7 @@ public class Code_Arena : MonoBehaviour {
     private void ActivateRing() {
         if (currentRing < rings.Length - ringsLengthDecreaser) {
             rings[currentRing].GetComponent<Animator>().SetTrigger("Activate");
+            UpdateCameraBonuses();
             currentRing++;
             StartCoroutine(TimeBetweenActivations(ringActivationTime));
         }        
@@ -47,6 +48,11 @@ public class Code_Arena : MonoBehaviour {
     // Sends the value of currentRing to whoever reqeusts it
     public int GetCurrentRingValue() {
         return currentRing;
+    }
+
+    // Update the camera position based on the currentRing
+    public void UpdateCameraBonuses() {
+        gameMng.camCon.UpdateBonuses(currentRing);
     }
 
     // Activates the bouncer
@@ -66,7 +72,7 @@ public class Code_Arena : MonoBehaviour {
         if (col.transform.CompareTag("Player")) {
             // Check to see if the player actually died before checking for a victory
             if (col.GetComponent<Code_Player>().death()) {
-                gameMng.GetComponent<Code_GameManager>().CheckForVictory(col.transform.gameObject);
+                gameMng.CheckForVictory(col.transform.gameObject);
             }
         }
 
