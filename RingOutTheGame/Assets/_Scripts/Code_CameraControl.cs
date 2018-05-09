@@ -21,9 +21,9 @@ public class Code_CameraControl : MonoBehaviour
     private float yStartPos; // Gets the transform.position at the start of the game
 
     [Header("ZoomBonus values based on the number of players selected")]
-    public float[] twoPlayersBonus; // all but the last indexes of the zoomBonus and yBonus, when two players were selected
-    public float[] threePlayersBonus; // all but the last indexes of the zoomBonus and yBonus, when three players were selected
-    public float[] fourPlayersBonus; // all but the last indexes of the zoomBonus and yBonus, when four players were selected
+    public int[] twoPlayersBonus; // all but the last indexes of the zoomBonus and yBonus, when two players were selected
+    public int[] threePlayersBonus; // all but the last indexes of the zoomBonus and yBonus, when three players were selected
+    public int[] fourPlayersBonus; // all but the last indexes of the zoomBonus and yBonus, when four players were selected
 
     // Need to check and see if we want to move the angles of the camera
     //public float angleMax;
@@ -100,21 +100,21 @@ public class Code_CameraControl : MonoBehaviour
             print("curRing is valued customer");
             curBonus = curRing;
         }
-    }
+    }    
 
     // Change the values of the zoomBonus items, all but the last, according to the playersSelected
     public void ChangeBonusValues(int numOfPlayers) {
         // First determines which bonus array should be used
-        List<float> playerBonusList = new List<float>();
+        List<int> playerBonusList = new List<int>();
         switch (numOfPlayers) {
             case 2:
-                playerBonusList = new List<float>(twoPlayersBonus);
+                playerBonusList = new List<int>(twoPlayersBonus);
                 break;
             case 3:
-                playerBonusList = new List<float>(threePlayersBonus);
+                playerBonusList = new List<int>(threePlayersBonus);
                 break;
             case 4:
-                playerBonusList = new List<float>(fourPlayersBonus);
+                playerBonusList = new List<int>(fourPlayersBonus);
                 break;
         }
 
